@@ -3,8 +3,8 @@
 use super::{Gemma4Config, cache::LayerKv};
 use anyhow::{Context, Result, bail};
 use candle_core::{
-    D, Device, Module, Tensor,
-    quantized::{QMatMul, gguf_file::Content},
+    CpuStorage, CustomOp1, D, Device, Layout, Module, Shape, Tensor, Var,
+    quantized::{GgmlDType, QMatMul, QTensor, gguf_file::Content},
 };
 use std::{fs::File, sync::Arc};
 
@@ -27,15 +27,29 @@ impl AttentionKind {
 #[derive(Clone)]
 struct Linear {
     weight: QMatMul,
+    quantized_weight: Arc<QTensor>,
+    dense_gradient_weight: Option<Tensor>,
 }
 
 impl Linear {
     fn load(content: &Content, file: &mut File, name: &str, device: &Device) -> Result<Self> {
-        let tensor = content
-            .tensor(file, name, device)
-            .with_context(|| format!("loading tensor {name}"))?;
+        let tensor = Arc::new(
+            content
+                .tensor(file, name, device)
+                .with_context(|| format!("loading tensor {name}"))?,
+        );
+        let dense_gradient_weight = match tensor.dtype() {
+            GgmlDType::F32 | GgmlDType::F16 | GgmlDType::BF16 => Some(
+                tensor
+                    .dequantize(device)?
+                    .to_dtype(candle_core::DType::F32)?,
+            ),
+            _ => None,
+        };
         Ok(Self {
-            weight: QMatMul::from_qtensor(tensor)?,
+            weight: QMatMul::from_arc(tensor.clone())?,
+            quantized_weight: tensor,
+            dense_gradient_weight,
         })
     }
 
@@ -43,8 +57,65 @@ impl Linear {
         Ok(self.weight.forward(x)?)
     }
 
+    fn forward_gradient(&self, x: &Tensor) -> Result<Tensor> {
+        match &self.dense_gradient_weight {
+            Some(weight) => Ok(x.matmul(&weight.t()?)?),
+            None => Ok(x.apply_op1(F32BackwardQMatMul {
+                weight: self.quantized_weight.clone(),
+            })?),
+        }
+    }
+
+    fn forward_mode(&self, x: &Tensor, differentiable: bool) -> Result<Tensor> {
+        if differentiable {
+            self.forward_gradient(x)
+        } else {
+            self.forward(x)
+        }
+    }
+
     fn embedding(&self, ids: &Tensor) -> Result<Tensor> {
         Ok(self.weight.embedding(ids)?)
+    }
+}
+
+/// Q8_0 forward with an F32 activation-only backward. The frozen weight is
+/// dequantized only while this operation's backward calculation is running.
+#[derive(Clone)]
+struct F32BackwardQMatMul {
+    weight: Arc<QTensor>,
+}
+
+impl CustomOp1 for F32BackwardQMatMul {
+    fn name(&self) -> &'static str {
+        "qmatmul-f32-activation-backward"
+    }
+
+    fn cpu_fwd(
+        &self,
+        storage: &CpuStorage,
+        layout: &Layout,
+    ) -> candle_core::Result<(CpuStorage, Shape)> {
+        self.weight.cpu_fwd(storage, layout)
+    }
+
+    fn bwd(
+        &self,
+        arg: &Tensor,
+        _result: &Tensor,
+        grad_result: &Tensor,
+    ) -> candle_core::Result<Option<Tensor>> {
+        let weight = self
+            .weight
+            .dequantize(arg.device())?
+            .to_dtype(candle_core::DType::F32)?;
+        let gradient = grad_result
+            .to_dtype(candle_core::DType::F32)?
+            .contiguous()?
+            .matmul(&weight)?;
+        // Prevent the returned first-order gradient from retaining the large
+        // temporary F32 weight through a second-order autograd graph.
+        Ok(Some(gradient.detach()))
     }
 }
 
@@ -168,36 +239,40 @@ impl Gemma4Block {
         start_position: usize,
         config: &Gemma4Config,
         rope: &Rope,
+        differentiable: bool,
     ) -> Result<Tensor> {
         let sequence = x.dim(0)?;
         let residual = x;
         let normalized = self.attn_norm.forward(x)?;
 
-        let q = self.q_proj.forward(&normalized)?.reshape((
-            sequence,
-            config.attention_heads,
-            self.head_dim,
-        ))?;
+        let q = self
+            .q_proj
+            .forward_mode(&normalized, differentiable)?
+            .reshape((sequence, config.attention_heads, self.head_dim))?;
         let q = self.q_norm.forward(&q)?;
         // Future hook: inspect or modify normalized Q before RoPE.
         let q = rope
-            .apply(&q, start_position, self.kind)?
+            .apply(&q, start_position, self.kind, differentiable)?
             .transpose(0, 1)?
             .unsqueeze(0)?;
 
         let current_kv = if let (Some(k_proj), Some(k_norm), Some(v_proj)) =
             (&self.k_proj, &self.k_norm, &self.v_proj)
         {
-            let k =
-                k_proj
-                    .forward(&normalized)?
-                    .reshape((sequence, config.kv_heads, self.head_dim))?;
+            let k = k_proj.forward_mode(&normalized, differentiable)?.reshape((
+                sequence,
+                config.kv_heads,
+                self.head_dim,
+            ))?;
             let k = k_norm.forward(&k)?;
-            let k = rope.apply(&k, start_position, self.kind)?.transpose(0, 1)?;
-            let v =
-                v_proj
-                    .forward(&normalized)?
-                    .reshape((sequence, config.kv_heads, self.head_dim))?;
+            let k = rope
+                .apply(&k, start_position, self.kind, differentiable)?
+                .transpose(0, 1)?;
+            let v = v_proj.forward_mode(&normalized, differentiable)?.reshape((
+                sequence,
+                config.kv_heads,
+                self.head_dim,
+            ))?;
             let v = rms_no_scale(&v, config.rms_norm_epsilon)?.transpose(0, 1)?;
             // Future hook: inspect or modify K/V before they enter the cache.
             let combined = match layer_cache.as_ref() {
@@ -232,29 +307,39 @@ impl Gemma4Block {
             x.device(),
         )?;
         let scores = scores.broadcast_add(&mask)?;
-        let probabilities = candle_nn::ops::softmax_last_dim(&scores)?;
+        let probabilities = if differentiable {
+            candle_nn::ops::softmax(&scores, D::Minus1)?
+        } else {
+            candle_nn::ops::softmax_last_dim(&scores)?
+        };
         // Future hook: inspect attention scores/probabilities here.
         let attention = probabilities.matmul(&value)?;
         let attention = attention
             .transpose(1, 2)?
             .contiguous()?
             .reshape((sequence, config.attention_heads * self.head_dim))?;
-        let attention = self.out_proj.forward(&attention)?;
+        let attention = self.out_proj.forward_mode(&attention, differentiable)?;
         let attention = self.post_attn_norm.forward(&attention)?;
         let after_attention = (residual + attention)?;
         // Future hook: residual stream after attention.
 
         let mlp_input = self.ffn_norm.forward(&after_attention)?;
-        let gate = self.ffn_gate.forward(&mlp_input)?.gelu()?;
-        let up = self.ffn_up.forward(&mlp_input)?;
-        let mlp = self.ffn_down.forward(&(gate * up)?)?;
+        let gate = self
+            .ffn_gate
+            .forward_mode(&mlp_input, differentiable)?
+            .gelu()?;
+        let up = self.ffn_up.forward_mode(&mlp_input, differentiable)?;
+        let mlp = self.ffn_down.forward_mode(&(gate * up)?, differentiable)?;
         // Future hook: inspect gate/up/product and MLP output here.
         let mlp = self.post_ffn_norm.forward(&mlp)?;
         let after_mlp = (after_attention + mlp)?;
 
-        let ple = self.ple_gate.forward(&after_mlp)?.gelu()?;
+        let ple = self
+            .ple_gate
+            .forward_mode(&after_mlp, differentiable)?
+            .gelu()?;
         let ple = ple.broadcast_mul(per_layer_input)?;
-        let ple = self.ple_proj.forward(&ple)?;
+        let ple = self.ple_proj.forward_mode(&ple, differentiable)?;
         let ple = self.post_ple_norm.forward(&ple)?;
         let output = (after_mlp + ple)?.broadcast_mul(&self.output_scale)?;
         // Future hook: residual stream at block output.
@@ -302,7 +387,13 @@ impl Rope {
         })
     }
 
-    fn apply(&self, x: &Tensor, start: usize, kind: AttentionKind) -> Result<Tensor> {
+    fn apply(
+        &self,
+        x: &Tensor,
+        start: usize,
+        kind: AttentionKind,
+        differentiable: bool,
+    ) -> Result<Tensor> {
         let sequence = x.dim(0)?;
         let inverse = match kind {
             AttentionKind::Sliding => &self.sliding_inv_freq,
@@ -315,7 +406,11 @@ impl Rope {
         let cos = angles.cos()?;
         let sin = angles.sin()?;
         let x = x.transpose(0, 1)?.unsqueeze(0)?.contiguous()?;
-        let rotated = candle_nn::rotary_emb::rope(&x, &cos, &sin)?;
+        let rotated = if differentiable {
+            candle_nn::rotary_emb::rope_slow(&x, &cos, &sin)?
+        } else {
+            candle_nn::rotary_emb::rope(&x, &cos, &sin)?
+        };
         Ok(rotated.squeeze(0)?.transpose(0, 1)?)
     }
 }
@@ -333,16 +428,25 @@ pub(crate) struct Gemma4Network {
     device: Device,
 }
 
+pub(crate) struct SuffixGradient {
+    pub(crate) loss: f32,
+    pub(crate) vocabulary_scores: Vec<Vec<f32>>,
+}
+
 impl Gemma4Network {
     pub(crate) fn load(content: &Content, file: &mut File, config: &Gemma4Config) -> Result<Self> {
         let device = Device::Cpu;
-        let token_tensor = content.tensor(file, "token_embd.weight", &device)?;
-        let token_weight = QMatMul::from_arc(Arc::new(token_tensor))?;
+        let token_tensor = Arc::new(content.tensor(file, "token_embd.weight", &device)?);
+        let token_weight = QMatMul::from_arc(token_tensor.clone())?;
         let token_embedding = Linear {
             weight: token_weight.clone(),
+            quantized_weight: token_tensor.clone(),
+            dense_gradient_weight: None,
         };
         let output = Linear {
             weight: token_weight,
+            quantized_weight: token_tensor,
+            dense_gradient_weight: None,
         };
         let mut blocks = Vec::with_capacity(config.layer_count);
         for layer in 0..config.layer_count {
@@ -394,19 +498,34 @@ impl Gemma4Network {
         }
         let ids = Tensor::from_slice(tokens, tokens.len(), &self.device)?;
         let embedded = self.token_embedding.embedding(&ids)?;
-        let mut hidden = (&embedded * (self.config.hidden_size as f64).sqrt())?;
-
         let token_ple = self.per_layer_token_embedding.embedding(&ids)?;
+        self.forward_embeddings(&embedded, &token_ple, cache, false, false)
+    }
+
+    fn forward_embeddings(
+        &self,
+        embedded: &Tensor,
+        token_ple: &Tensor,
+        cache: &mut super::KvCache,
+        differentiable: bool,
+        all_logits: bool,
+    ) -> Result<Tensor> {
+        let tokens = embedded.dim(0)?;
+        let start = cache.sequence_position();
+        let mut hidden = (embedded * (self.config.hidden_size as f64).sqrt())?;
+
         let token_ple = (token_ple * (self.config.per_layer_embedding_size as f64).sqrt())?
             .reshape((
-                tokens.len(),
+                tokens,
                 self.config.layer_count,
                 self.config.per_layer_embedding_size,
             ))?;
-        let projected_ple = self.per_layer_model_projection.forward(&hidden)?;
+        let projected_ple = self
+            .per_layer_model_projection
+            .forward_mode(&hidden, differentiable)?;
         let projected_ple = (projected_ple * (self.config.hidden_size as f64).sqrt().recip())?
             .reshape((
-                tokens.len(),
+                tokens,
                 self.config.layer_count,
                 self.config.per_layer_embedding_size,
             ))?;
@@ -430,6 +549,7 @@ impl Gemma4Network {
                 start,
                 &self.config,
                 &self.rope,
+                differentiable,
             )?;
             if layer_index == self.config.layer_count - self.config.shared_kv_layers - 2 {
                 shared_sliding = cache.layers[layer_index].clone();
@@ -438,15 +558,125 @@ impl Gemma4Network {
                 shared_global = cache.layers[layer_index].clone();
             }
         }
-        cache.advance(tokens.len());
+        cache.advance(tokens);
 
         let hidden = self.final_norm.forward(&hidden)?;
         // Future hook: final hidden state before the tied LM head.
-        let last = hidden.narrow(0, tokens.len() - 1, 1)?;
-        let logits = self.output.forward(&last)?;
+        let output_hidden = if all_logits {
+            hidden
+        } else {
+            hidden.narrow(0, tokens - 1, 1)?
+        };
+        let logits = self.output.forward_mode(&output_hidden, differentiable)?;
         let cap = self.config.final_logit_softcap;
         Ok(((logits / cap)?.tanh()? * cap)?)
     }
+
+    /// Compute an F32 one-hot vocabulary gradient for every suffix position.
+    /// The full sequence is recomputed so suffix K/V remains graph-connected.
+    pub(crate) fn suffix_gradient(
+        &self,
+        input_tokens: &[u32],
+        suffix_start: usize,
+        suffix_length: usize,
+        target_start: usize,
+        target_tokens: &[u32],
+    ) -> Result<SuffixGradient> {
+        if suffix_length == 0 || target_tokens.is_empty() {
+            bail!("suffix gradient requires non-empty suffix and target");
+        }
+        if suffix_start + suffix_length > input_tokens.len() || target_start == 0 {
+            bail!("invalid suffix or target range for gradient input");
+        }
+        if input_tokens.len() > self.config.context_length {
+            bail!("context length exceeds {}", self.config.context_length);
+        }
+        if target_start + target_tokens.len() - 1 > input_tokens.len() {
+            bail!("gradient input does not contain the teacher-forced target prefix");
+        }
+
+        let ids = Tensor::from_slice(input_tokens, input_tokens.len(), &self.device)?;
+        let embedded = self.token_embedding.embedding(&ids)?;
+        let token_ple = self.per_layer_token_embedding.embedding(&ids)?;
+        let suffix_main = Var::from_tensor(&embedded.narrow(0, suffix_start, suffix_length)?)?;
+        let suffix_ple = Var::from_tensor(&token_ple.narrow(0, suffix_start, suffix_length)?)?;
+        let embedded = replace_rows(
+            &embedded,
+            suffix_main.as_tensor(),
+            suffix_start,
+            suffix_length,
+        )?;
+        let token_ple = replace_rows(
+            &token_ple,
+            suffix_ple.as_tensor(),
+            suffix_start,
+            suffix_length,
+        )?;
+
+        let mut cache = super::KvCache::new(self.config.layer_count);
+        let logits = self.forward_embeddings(&embedded, &token_ple, &mut cache, true, true)?;
+        let prediction_positions: Vec<u32> = (0..target_tokens.len())
+            .map(|index| (target_start - 1 + index) as u32)
+            .collect();
+        let prediction_positions =
+            Tensor::from_vec(prediction_positions, target_tokens.len(), &self.device)?;
+        let selected_logits = logits.index_select(&prediction_positions, 0)?;
+        let log_probabilities = candle_nn::ops::log_softmax(&selected_logits, D::Minus1)?;
+        let targets =
+            Tensor::from_slice(target_tokens, target_tokens.len(), &self.device)?.unsqueeze(1)?;
+        let loss = log_probabilities.gather(&targets, 1)?.sum_all()?.neg()?;
+        let gradients = loss.backward()?;
+        let main_gradient = gradients
+            .get(suffix_main.as_tensor())
+            .context("missing main suffix embedding gradient")?;
+        let ple_gradient = gradients
+            .get(suffix_ple.as_tensor())
+            .context("missing per-layer suffix embedding gradient")?;
+        if main_gradient.dtype() != candle_core::DType::F32
+            || ple_gradient.dtype() != candle_core::DType::F32
+        {
+            bail!("suffix embedding gradients must be F32");
+        }
+
+        // dL/d(one-hot) includes both Gemma 4 token-identity paths.
+        let main_scores = self.output.forward(main_gradient)?;
+        let ple_scores = self.per_layer_token_embedding.forward(ple_gradient)?;
+        let vocabulary_scores = (main_scores + ple_scores)?.to_vec2::<f32>()?;
+        if vocabulary_scores
+            .iter()
+            .flatten()
+            .any(|score| !score.is_finite())
+        {
+            bail!("model produced non-finite suffix gradients");
+        }
+        let loss = loss.to_scalar::<f32>()?;
+        if !loss.is_finite() {
+            bail!("model produced a non-finite differentiable loss");
+        }
+        Ok(SuffixGradient {
+            loss,
+            vocabulary_scores,
+        })
+    }
+}
+
+fn replace_rows(
+    source: &Tensor,
+    replacement: &Tensor,
+    start: usize,
+    length: usize,
+) -> Result<Tensor> {
+    let total = source.dim(0)?;
+    let mut parts = Vec::with_capacity(3);
+    if start > 0 {
+        parts.push(source.narrow(0, 0, start)?);
+    }
+    parts.push(replacement.clone());
+    if start + length < total {
+        parts.push(source.narrow(0, start + length, total - start - length)?);
+    }
+    let references: Vec<&Tensor> = parts.iter().collect();
+    Ok(Tensor::cat(&references, 0)?)
 }
 
 fn rms_no_scale(x: &Tensor, epsilon: f64) -> Result<Tensor> {
@@ -495,6 +725,7 @@ fn attention_mask(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use candle_core::quantized::GgmlDType;
 
     #[test]
     fn masks_are_causal_and_sliding() -> Result<()> {
@@ -511,6 +742,64 @@ mod tests {
         assert!(sliding[0].is_infinite());
         assert!(sliding[1].is_infinite());
         assert_eq!(&sliding[2..], &[0.0, 0.0]);
+        Ok(())
+    }
+
+    #[test]
+    fn quantized_linear_f32_backward_matches_dense_reference() -> Result<()> {
+        let device = Device::Cpu;
+        let weight_values: Vec<f32> = (0..3 * 32)
+            .map(|index| (index as f32 - 40.0) / 37.0)
+            .collect();
+        let dense_weight = Tensor::from_vec(weight_values, (3, 32), &device)?;
+        let quantized = Arc::new(QTensor::quantize(&dense_weight, GgmlDType::Q8_0)?);
+        let effective_weight = quantized.dequantize(&device)?;
+        let input_values: Vec<f32> = (0..2 * 32)
+            .map(|index| (index as f32 - 20.0) / 29.0)
+            .collect();
+        let input = Var::from_vec(input_values.clone(), (2, 32), &device)?;
+        let output = input.apply_op1(F32BackwardQMatMul {
+            weight: quantized.clone(),
+        })?;
+
+        let forward_reference = input.matmul(&effective_weight.t()?)?;
+        let forward_error = (&output - forward_reference)?
+            .abs()?
+            .max_all()?
+            .to_scalar::<f32>()?;
+        // The Q8 kernel and dense dequantized matmul accumulate in a different
+        // order, so forward parity is approximate rather than bit-identical.
+        assert!(forward_error < 5e-2, "forward error {forward_error}");
+
+        let output_gradient =
+            Tensor::from_vec(vec![0.5f32, -1.0, 2.0, 1.5, 0.25, -0.75], (2, 3), &device)?;
+        let loss = (&output * &output_gradient)?.sum_all()?;
+        let gradients = loss.backward()?;
+        let actual = gradients.get(input.as_tensor()).context("input gradient")?;
+        let expected = output_gradient.matmul(&effective_weight)?;
+        let gradient_error = (actual - expected)?.abs()?.max_all()?.to_scalar::<f32>()?;
+        assert!(gradient_error < 1e-5, "gradient error {gradient_error}");
+
+        let element = 7;
+        let epsilon = 1e-2;
+        let mut plus = input_values.clone();
+        let mut minus = input_values;
+        plus[element] += epsilon;
+        minus[element] -= epsilon;
+        let finite_loss = |values: Vec<f32>| -> candle_core::Result<f32> {
+            let value = Tensor::from_vec(values, (2, 32), &device)?;
+            // The custom backward deliberately follows this dequantized F32
+            // surrogate, not the non-smooth activation quantization inside
+            // the optimized Q8 forward kernel.
+            let output = value.matmul(&effective_weight.t()?)?;
+            (&output * &output_gradient)?.sum_all()?.to_scalar::<f32>()
+        };
+        let numerical = (finite_loss(plus)? - finite_loss(minus)?) / (2.0 * epsilon);
+        let analytic = actual.flatten_all()?.to_vec1::<f32>()?[element];
+        assert!(
+            (numerical - analytic).abs() < 1e-2,
+            "finite difference {numerical}, analytic {analytic}"
+        );
         Ok(())
     }
 }

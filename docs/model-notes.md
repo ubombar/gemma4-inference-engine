@@ -143,7 +143,7 @@ implementation.
 The runnable path is now:
 
 ```text
-src/main.rs
+examples/normal_inference.rs
   -> Model::load
   -> GGUF validation and embedded Gemma 4 tokenizer
   -> quantized Gemma4Network weights
@@ -163,9 +163,34 @@ embedding/matrix kernels. `Model::logits_for_prompt` and `Model::prefill`
 return the complete final-position logits vector. Future interpretability hook
 locations are marked directly in `src/api/architecture.rs`.
 
-Build and run the requested demo with:
+Build the library and examples, then run a selected example with:
 
 ```bash
 cargo build --release
-./target/release/gemma4-inference-engine
+cargo run --release --example normal_inference
+cargo run --release --example gcg_search
 ```
+
+## GCG-style suffix optimization
+
+`Model::optimize_suffix` implements seeded, gradient-free greedy coordinate
+search over a fixed-length token suffix. It pre-fills the invariant user-prompt
+prefix once and clones that `KvCache` for every candidate. A candidate evaluation
+forwards its suffix and the closing chat-template tokens, then uses one-token
+cached decode under teacher forcing for the remaining target tokens.
+
+The reported objective is the summed target negative log-likelihood, calculated
+with a stable log-sum-exp. Candidate IDs are selected only from ordinary
+vocabulary tokens, excluding control and special tokens.
+
+`Model::optimize_suffix_with_gradients` adds the gradient-guided path. Its
+custom Q8 linear operation retains the quantized forward and temporarily
+dequantizes one frozen matrix for an F32 activation-only backward. The gradient
+is a straight-through F32 surrogate for the optimized Q8 kernel. Differentiable
+RoPE and softmax use explicit Candle tensor operations. Suffix candidate scores
+sum the main token-embedding contribution and the complete 42-layer PLE token
+embedding contribution. Exact discrete Q8_0 teacher-forced loss—not the
+surrogate gradient loss—determines whether a proposal is accepted.
+
+See [gradient-gcg-plan.md](gradient-gcg-plan.md) for the algorithm, dtype
+boundary, verification strategy, and memory constraints.

@@ -11,7 +11,7 @@ pub(crate) struct LayerKv {
 }
 
 /// Autoregressive state owned by a loaded model.
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct KvCache {
     pub(crate) layers: Vec<Option<LayerKv>>,
     sequence_position: usize,

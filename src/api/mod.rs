@@ -2,6 +2,7 @@
 
 mod architecture;
 mod cache;
+mod optimizer;
 mod sampling;
 mod tokenizer;
 
@@ -19,6 +20,11 @@ use tokenizer::Gemma4Tokenizer;
 
 pub use architecture::AttentionKind;
 pub use cache::KvCache;
+pub use optimizer::{
+    GradientSuffixOptimizationRequest, GradientSuffixOptimizationResult,
+    GradientSuffixOptimizationStep, SuffixEvaluation, SuffixOptimizationRequest,
+    SuffixOptimizationResult, SuffixOptimizationStep, TargetTokenProbability, TokenProbability,
+};
 pub use sampling::SamplingConfig;
 pub use tokenizer::{ChatMessage, serialize_user_prompt};
 

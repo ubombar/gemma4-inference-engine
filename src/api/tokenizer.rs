@@ -20,10 +20,18 @@ pub fn serialize_user_prompt(prompt: &str) -> String {
     format!("<|turn>user\n{}<turn|>\n<|turn>model\n", prompt.trim())
 }
 
+pub(crate) fn adversarial_prompt_parts(prompt: &str) -> (String, &'static str) {
+    (
+        format!("<|turn>user\n{}", prompt.trim()),
+        "<turn|>\n<|turn>model\n",
+    )
+}
+
 pub(crate) struct Gemma4Tokenizer {
     inner: Tokenizer,
     bos_id: u32,
     eos_id: u32,
+    ordinary_token_ids: Vec<u32>,
 }
 
 impl Gemma4Tokenizer {
@@ -76,6 +84,11 @@ impl Gemma4Tokenizer {
         let token_types = numbers(content, "tokenizer.ggml.token_type")?;
         let mut controls = Vec::new();
         let mut user_defined = Vec::new();
+        let ordinary_token_ids = token_types
+            .iter()
+            .enumerate()
+            .filter_map(|(id, &token_type)| (token_type == 1 && id > 4).then_some(id as u32))
+            .collect();
         for (token, token_type) in tokens.iter().zip(token_types) {
             match token_type {
                 3 => controls.push(AddedToken::from(token.clone(), true)),
@@ -90,18 +103,44 @@ impl Gemma4Tokenizer {
             inner,
             bos_id: number(content, "tokenizer.ggml.bos_token_id")?,
             eos_id: number(content, "tokenizer.ggml.eos_token_id")?,
+            ordinary_token_ids,
         })
     }
 
     pub(crate) fn encode_prompt(&self, serialized: &str) -> Result<Vec<u32>> {
+        let mut ids = self.encode_text(serialized)?;
+        ids.insert(0, self.bos_id);
+        Ok(ids)
+    }
+
+    pub(crate) fn encode_text(&self, text: &str) -> Result<Vec<u32>> {
         let encoding = self
             .inner
-            .encode(serialized, true)
-            .map_err(|error| anyhow::anyhow!("tokenizing prompt: {error}"))?;
-        let mut ids = Vec::with_capacity(encoding.len() + 1);
-        ids.push(self.bos_id);
-        ids.extend_from_slice(encoding.get_ids());
+            .encode(text, true)
+            .map_err(|error| anyhow::anyhow!("tokenizing text: {error}"))?;
+        Ok(encoding.get_ids().to_vec())
+    }
+
+    pub(crate) fn encode_prefix(&self, text: &str) -> Result<Vec<u32>> {
+        let mut ids = self.encode_text(text)?;
+        ids.insert(0, self.bos_id);
         Ok(ids)
+    }
+
+    pub(crate) fn ordinary_token_ids(&self) -> Vec<u32> {
+        self.ordinary_token_ids.clone()
+    }
+
+    pub(crate) fn initial_suffix_token(&self) -> Result<u32> {
+        for piece in [" !", "!", "."] {
+            if let Some(&id) = self.encode_text(piece)?.last()
+                && id > 4
+                && id != self.eos_id
+            {
+                return Ok(id);
+            }
+        }
+        bail!("could not find an ordinary token for suffix initialization")
     }
 
     pub(crate) fn decode(&self, ids: &[u32], skip_special: bool) -> Result<String> {
