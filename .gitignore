@@ -1,0 +1,5 @@
+/target/
+/model/*.gguf
+/session-*.md
+.DS_Store
+

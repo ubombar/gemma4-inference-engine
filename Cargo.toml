@@ -1,0 +1,16 @@
+[package]
+name = "gemma4-inference-engine"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "A small research-oriented inference engine for Gemma 4 E4B Q8_0"
+
+[dependencies]
+anyhow = "1.0"
+candle-core = "0.11.0"
+candle-nn = "0.11.0"
+rand = "0.9"
+tokenizers = "0.22.2"
+
+[profile.release]
+debug = 1

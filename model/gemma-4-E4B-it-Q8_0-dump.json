@@ -1,0 +1,6515 @@
+{
+  "filename": "gemma-4-E4B-it-Q8_0.gguf",
+  "endian": "LITTLE",
+  "metadata": {
+    "GGUF.version": {
+      "index": 0,
+      "type": "UINT32",
+      "offset": 4,
+      "value": 3
+    },
+    "GGUF.tensor_count": {
+      "index": 1,
+      "type": "UINT64",
+      "offset": 8,
+      "value": 720
+    },
+    "GGUF.kv_count": {
+      "index": 2,
+      "type": "UINT64",
+      "offset": 16,
+      "value": 56
+    },
+    "general.architecture": {
+      "index": 3,
+      "type": "STRING",
+      "offset": 24,
+      "value": "gemma4"
+    },
+    "general.type": {
+      "index": 4,
+      "type": "STRING",
+      "offset": 70,
+      "value": "model"
+    },
+    "general.sampling.top_k": {
+      "index": 5,
+      "type": "INT32",
+      "offset": 107,
+      "value": 64
+    },
+    "general.sampling.top_p": {
+      "index": 6,
+      "type": "FLOAT32",
+      "offset": 145,
+      "value": 0.949999988079071
+    },
+    "general.sampling.temp": {
+      "index": 7,
+      "type": "FLOAT32",
+      "offset": 183,
+      "value": 1.0
+    },
+    "general.name": {
+      "index": 8,
+      "type": "STRING",
+      "offset": 220,
+      "value": "Gemma-4-E4B-It"
+    },
+    "general.basename": {
+      "index": 9,
+      "type": "STRING",
+      "offset": 266,
+      "value": "Gemma-4-E4B-It"
+    },
+    "general.quantized_by": {
+      "index": 10,
+      "type": "STRING",
+      "offset": 316,
+      "value": "Unsloth"
+    },
+    "general.size_label": {
+      "index": 11,
+      "type": "STRING",
+      "offset": 363,
+      "value": "7.5B"
+    },
+    "general.license": {
+      "index": 12,
+      "type": "STRING",
+      "offset": 405,
+      "value": "apache-2.0"
+    },
+    "general.license.link": {
+      "index": 13,
+      "type": "STRING",
+      "offset": 450,
+      "value": "https://ai.google.dev/gemma/docs/gemma_4_license"
+    },
+    "general.repo_url": {
+      "index": 14,
+      "type": "STRING",
+      "offset": 538,
+      "value": "https://huggingface.co/unsloth"
+    },
+    "general.base_model.count": {
+      "index": 15,
+      "type": "UINT32",
+      "offset": 604,
+      "value": 1
+    },
+    "general.base_model.0.name": {
+      "index": 16,
+      "type": "STRING",
+      "offset": 644,
+      "value": "Gemma 4 E4B It"
+    },
+    "general.base_model.0.organization": {
+      "index": 17,
+      "type": "STRING",
+      "offset": 703,
+      "value": "Google"
+    },
+    "general.base_model.0.repo_url": {
+      "index": 18,
+      "type": "STRING",
+      "offset": 762,
+      "value": "https://huggingface.co/google/gemma-4-E4B-it"
+    },
+    "general.tags": {
+      "index": 19,
+      "type": "ARRAY",
+      "offset": 855,
+      "array_types": [
+        "STRING"
+      ]
+    },
+    "gemma4.block_count": {
+      "index": 20,
+      "type": "UINT32",
+      "offset": 924,
+      "value": 42
+    },
+    "gemma4.context_length": {
+      "index": 21,
+      "type": "UINT32",
+      "offset": 958,
+      "value": 131072
+    },
+    "gemma4.embedding_length": {
+      "index": 22,
+      "type": "UINT32",
+      "offset": 995,
+      "value": 2560
+    },
+    "gemma4.feed_forward_length": {
+      "index": 23,
+      "type": "UINT32",
+      "offset": 1034,
+      "value": 10240
+    },
+    "gemma4.attention.head_count": {
+      "index": 24,
+      "type": "UINT32",
+      "offset": 1076,
+      "value": 8
+    },
+    "gemma4.attention.head_count_kv": {
+      "index": 25,
+      "type": "UINT32",
+      "offset": 1119,
+      "value": 2
+    },
+    "gemma4.rope.freq_base": {
+      "index": 26,
+      "type": "FLOAT32",
+      "offset": 1165,
+      "value": 1000000.0
+    },
+    "gemma4.rope.freq_base_swa": {
+      "index": 27,
+      "type": "FLOAT32",
+      "offset": 1202,
+      "value": 10000.0
+    },
+    "gemma4.attention.layer_norm_rms_epsilon": {
+      "index": 28,
+      "type": "FLOAT32",
+      "offset": 1243,
+      "value": 9.999999974752427E-7
+    },
+    "gemma4.attention.key_length": {
+      "index": 29,
+      "type": "UINT32",
+      "offset": 1298,
+      "value": 512
+    },
+    "gemma4.attention.value_length": {
+      "index": 30,
+      "type": "UINT32",
+      "offset": 1341,
+      "value": 512
+    },
+    "gemma4.final_logit_softcapping": {
+      "index": 31,
+      "type": "FLOAT32",
+      "offset": 1386,
+      "value": 30.0
+    },
+    "gemma4.attention.sliding_window": {
+      "index": 32,
+      "type": "UINT32",
+      "offset": 1432,
+      "value": 512
+    },
+    "gemma4.attention.shared_kv_layers": {
+      "index": 33,
+      "type": "UINT32",
+      "offset": 1479,
+      "value": 18
+    },
+    "gemma4.embedding_length_per_layer_input": {
+      "index": 34,
+      "type": "UINT32",
+      "offset": 1528,
+      "value": 256
+    },
+    "gemma4.attention.sliding_window_pattern": {
+      "index": 35,
+      "type": "ARRAY",
+      "offset": 1583,
+      "array_types": [
+        "BOOL"
+      ]
+    },
+    "gemma4.attention.key_length_swa": {
+      "index": 36,
+      "type": "UINT32",
+      "offset": 1688,
+      "value": 256
+    },
+    "gemma4.attention.value_length_swa": {
+      "index": 37,
+      "type": "UINT32",
+      "offset": 1735,
+      "value": 256
+    },
+    "gemma4.rope.dimension_count": {
+      "index": 38,
+      "type": "UINT32",
+      "offset": 1784,
+      "value": 512
+    },
+    "gemma4.rope.dimension_count_swa": {
+      "index": 39,
+      "type": "UINT32",
+      "offset": 1827,
+      "value": 256
+    },
+    "tokenizer.ggml.model": {
+      "index": 40,
+      "type": "STRING",
+      "offset": 1874,
+      "value": "gemma4"
+    },
+    "tokenizer.ggml.tokens": {
+      "index": 41,
+      "type": "ARRAY",
+      "offset": 1920,
+      "array_types": [
+        "STRING"
+      ]
+    },
+    "tokenizer.ggml.scores": {
+      "index": 42,
+      "type": "ARRAY",
+      "offset": 4415412,
+      "array_types": [
+        "FLOAT32"
+      ]
+    },
+    "tokenizer.ggml.token_type": {
+      "index": 43,
+      "type": "ARRAY",
+      "offset": 5464033,
+      "array_types": [
+        "INT32"
+      ]
+    },
+    "tokenizer.ggml.merges": {
+      "index": 44,
+      "type": "ARRAY",
+      "offset": 6512658,
+      "array_types": [
+        "STRING"
+      ]
+    },
+    "tokenizer.ggml.bos_token_id": {
+      "index": 45,
+      "type": "UINT32",
+      "offset": 15764422,
+      "value": 2
+    },
+    "tokenizer.ggml.eos_token_id": {
+      "index": 46,
+      "type": "UINT32",
+      "offset": 15764465,
+      "value": 106
+    },
+    "tokenizer.ggml.unknown_token_id": {
+      "index": 47,
+      "type": "UINT32",
+      "offset": 15764508,
+      "value": 3
+    },
+    "tokenizer.ggml.padding_token_id": {
+      "index": 48,
+      "type": "UINT32",
+      "offset": 15764555,
+      "value": 0
+    },
+    "tokenizer.ggml.mask_token_id": {
+      "index": 49,
+      "type": "UINT32",
+      "offset": 15764602,
+      "value": 4
+    },
+    "tokenizer.ggml.add_space_prefix": {
+      "index": 50,
+      "type": "BOOL",
+      "offset": 15764646,
+      "value": false
+    },
+    "tokenizer.ggml.add_bos_token": {
+      "index": 51,
+      "type": "BOOL",
+      "offset": 15764690,
+      "value": true
+    },
+    "general.quantization_version": {
+      "index": 52,
+      "type": "UINT32",
+      "offset": 15764731,
+      "value": 2
+    },
+    "general.file_type": {
+      "index": 53,
+      "type": "UINT32",
+      "offset": 15764775,
+      "value": 7
+    },
+    "quantize.imatrix.file": {
+      "index": 54,
+      "type": "STRING",
+      "offset": 15764808,
+      "value": "gemma-4-E4B-it-GGUF/imatrix_unsloth.gguf"
+    },
+    "quantize.imatrix.dataset": {
+      "index": 55,
+      "type": "STRING",
+      "offset": 15764889,
+      "value": "unsloth_calibration_gemma-4-E4B-it.txt"
+    },
+    "quantize.imatrix.entries_count": {
+      "index": 56,
+      "type": "UINT32",
+      "offset": 15764971,
+      "value": 342
+    },
+    "quantize.imatrix.chunks_count": {
+      "index": 57,
+      "type": "UINT32",
+      "offset": 15765017,
+      "value": 141
+    },
+    "tokenizer.chat_template": {
+      "index": 58,
+      "type": "STRING",
+      "offset": 15765062,
+      "value": "{%- macro format_parameters(properties, required, filter_keys=false) -%}\n    {%- set standard_keys = ['description', 'type', 'properties', 'required', 'nullable'] -%}\n    {%- set ns = namespace(found_first=false) -%}\n    {%- for key, value in properties | dictsort -%}\n        {%- set add_comma = false -%}\n        {%- if not filter_keys or key not in standard_keys -%}\n            {%- if ns.found_first %},{% endif -%}\n            {%- set ns.found_first = true -%}\n            {{ key }}:{\n            {%- if value['description'] -%}\n                description:<|\"|>{{ value['description'] }}<|\"|>\n                {%- set add_comma = true -%}\n            {%- endif -%}\n            {%- if value['type'] | upper == 'STRING' -%}\n                {%- if value['enum'] -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    enum:{{ format_argument(value['enum']) }}\n                {%- endif -%}\n            {%- elif value['type'] | upper == 'ARRAY' -%}\n                {%- if value['items'] is mapping and value['items'] -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    items:{\n                    {%- set ns_items = namespace(found_first=false) -%}\n                    {%- for item_key, item_value in value['items'] | dictsort -%}\n                        {%- if item_value is not none -%}\n                            {%- if ns_items.found_first %},{% endif -%}\n                            {%- set ns_items.found_first = true -%}\n                            {%- if item_key == 'properties' -%}\n                                properties:{\n                                {%- if item_value is mapping -%}\n                                    {{- format_parameters(item_value, value['items']['required'] | default([])) -}}\n                                {%- endif -%}\n                                }\n                            {%- elif item_key == 'required' -%}\n                                required:[\n                                {%- for req_item in item_value -%}\n                                    <|\"|>{{- req_item -}}<|\"|>\n                                    {%- if not loop.last %},{% endif -%}\n                                {%- endfor -%}\n                                ]\n                            {%- elif item_key == 'type' -%}\n                                {%- if item_value is string -%}\n                                    type:{{ format_argument(item_value | upper) }}\n                                {%- else -%}\n                                    type:{{ format_argument(item_value | map('upper') | list) }}\n                                {%- endif -%}\n                            {%- else -%}\n                                {{ item_key }}:{{ format_argument(item_value) }}\n                            {%- endif -%}\n                        {%- endif -%}\n                    {%- endfor -%}\n                    }\n                {%- endif -%}\n            {%- endif -%}\n            {%- if value['nullable'] %}\n                {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                nullable:true\n            {%- endif -%}\n            {%- if value['type'] | upper == 'OBJECT' -%}\n                {%- if value['properties'] is defined and value['properties'] is mapping -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    properties:{\n                    {{- format_parameters(value['properties'], value['required'] | default([])) -}}\n                    }\n                {%- elif value is mapping -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    properties:{\n                    {{- format_parameters(value, value['required'] | default([]), filter_keys=true) -}}\n                    }\n                {%- endif -%}\n                {%- if value['required'] -%}\n                    {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n                    required:[\n                    {%- for item in value['required'] | default([]) -%}\n                        <|\"|>{{- item -}}<|\"|>\n                        {%- if not loop.last %},{% endif -%}\n                    {%- endfor -%}\n                    ]\n                {%- endif -%}\n            {%- endif -%}\n            {%- if add_comma %},{%- else -%} {%- set add_comma = true -%} {% endif -%}\n            type:<|\"|>{{ value['type'] | upper }}<|\"|>}\n        {%- endif -%}\n    {%- endfor -%}\n{%- endmacro -%}\n{%- macro format_function_declaration(tool_data) -%}\n    declaration:{{- tool_data['function']['name'] -}}{description:<|\"|>{{- tool_data['function']['description'] -}}<|\"|>\n    {%- set params = tool_data['function']['parameters'] -%}\n    {%- if params -%}\n        ,parameters:{\n        {%- if params['properties'] -%}\n            properties:{ {{- format_parameters(params['properties'], params['required']) -}} },\n        {%- endif -%}\n        {%- if params['required'] -%}\n            required:[\n            {%- for item in params['required'] -%}\n                <|\"|>{{- item -}}<|\"|>\n                {{- ',' if not loop.last -}}\n            {%- endfor -%}\n            ],\n        {%- endif -%}\n        {%- if params['type'] -%}\n            type:<|\"|>{{- params['type'] | upper -}}<|\"|>}\n        {%- endif -%}\n    {%- endif -%}\n    {%- if 'response' in tool_data['function'] -%}\n        {%- set response_declaration = tool_data['function']['response'] -%}\n        ,response:{\n        {%- if response_declaration['description'] -%}\n            description:<|\"|>{{- response_declaration['description'] -}}<|\"|>,\n        {%- endif -%}\n        {%- if response_declaration['type'] | upper == 'OBJECT' -%}\n            type:<|\"|>{{- response_declaration['type'] | upper -}}<|\"|>}\n        {%- endif -%}\n    {%- endif -%}\n    }\n{%- endmacro -%}\n{%- macro format_argument(argument, escape_keys=True) -%}\n    {%- if argument is none -%}\n        {{- 'null' -}}\n    {%- elif argument is string -%}\n        {{- '<|\"|>' + argument + '<|\"|>' -}}\n    {%- elif argument is boolean -%}\n        {{- 'true' if argument else 'false' -}}\n    {%- elif argument is mapping -%}\n        {{- '{' -}}\n        {%- set ns = namespace(found_first=false) -%}\n        {%- for key, value in argument | dictsort -%}\n            {%- if ns.found_first %},{% endif -%}\n            {%- set ns.found_first = true -%}\n            {%- if escape_keys -%}\n                {{- '<|\"|>' + key + '<|\"|>' -}}\n            {%- else -%}\n                {{- key -}}\n            {%- endif -%}\n            :{{- format_argument(value, escape_keys=escape_keys) -}}\n        {%- endfor -%}\n        {{- '}' -}}\n    {%- elif argument is sequence -%}\n        {{- '[' -}}\n        {%- for item in argument -%}\n            {{- format_argument(item, escape_keys=escape_keys) -}}\n            {%- if not loop.last %},{% endif -%}\n        {%- endfor -%}\n        {{- ']' -}}\n    {%- else -%}\n        {{- argument -}}\n    {%- endif -%}\n{%- endmacro -%}\n{%- macro strip_thinking(text) -%}\n    {%- set ns = namespace(result='') -%}\n    {%- for part in text.split('<channel|>') -%}\n        {%- if '<|channel>' in part -%}\n            {%- set ns.result = ns.result + part.split('<|channel>')[0] -%}\n        {%- else -%}\n            {%- set ns.result = ns.result + part -%}\n        {%- endif -%}\n    {%- endfor -%}\n    {{- ns.result | trim -}}\n{%- endmacro -%}\n\n{%- macro format_tool_response_block(tool_name, response) -%}\n    {{- '<|tool_response>' -}}\n    {%- if response is mapping -%}\n        {{- 'response:' + tool_name + '{' -}}\n        {%- for key, value in response | dictsort -%}\n            {{- key -}}:{{- format_argument(value, escape_keys=False) -}}\n            {%- if not loop.last %},{% endif -%}\n        {%- endfor -%}\n        {{- '}' -}}\n    {%- else -%}\n        {{- 'response:' + tool_name + '{value:' + format_argument(response, escape_keys=False) + '}' -}}\n    {%- endif -%}\n    {{- '<tool_response|>' -}}\n{%- endmacro -%}\n\n{#- ===== SETUP ===== -#}\n{%- set ns = namespace(prev_message_type=None, prev_non_tool_role=None) -%}\n{%- set loop_messages = messages -%}\n{%- set enable_thinking = enable_thinking | default(false) -%}\n{%- set preserve_thinking = preserve_thinking | default(false) -%}\n{{- bos_token -}}\n{#- Handle System/Tool Definitions Block -#}\n{%- if enable_thinking or tools or (messages and messages[0]['role'] in ['system', 'developer']) -%}\n    {{- '<|turn>system\\n' -}}\n    {#- Inject Thinking token at the very top of the FIRST system turn -#}\n    {%- if enable_thinking -%}\n        {{- '<|think|>\\n' -}}\n        {%- set ns.prev_message_type = 'think' -%}\n    {%- endif -%}\n    {%- if messages and messages[0]['role'] in ['system', 'developer'] -%}\n        {%- if messages[0]['content'] is string -%}\n            {{- messages[0]['content'] | trim -}}\n        {%- elif messages[0]['content'] is sequence -%}\n            {%- for item in messages[0]['content'] -%}\n                {{- item['text'] | trim + ' '-}}\n            {%- endfor -%}\n        {%- endif -%}\n        {%- set loop_messages = messages[1:] -%}\n    {%- endif -%}\n    {%- if tools -%}\n        {%- for tool in tools %}\n            {{- '<|tool>' -}}\n            {{- format_function_declaration(tool) | trim -}}\n            {{- '<tool|>' -}}\n        {%- endfor %}\n        {%- set ns.prev_message_type = 'tool' -%}\n    {%- endif -%}\n    {{- '<turn|>\\n' -}}\n{%- endif %}\n\n{#- Pre-scan: find last user message index for reasoning guard -#}\n{%- set ns_turn = namespace(last_user_idx=-1) -%}\n{%- for i in range(loop_messages | length) -%}\n    {%- if loop_messages[i]['role'] == 'user' -%}\n        {%- set ns_turn.last_user_idx = i -%}\n    {%- endif -%}\n{%- endfor -%}\n\n{#- Loop through messages -#}\n{%- for message in loop_messages -%}\n    {%- if message['role'] != 'tool' -%}\n    {%- set ns.prev_message_type = None -%}\n    {%- set role = 'model' if message['role'] == 'assistant' else message['role'] -%}\n    {#- Detect continuation using tracked state — O(1) instead of O(n) backward scan -#}\n    {%- set continue_same_model_turn = (role == 'model' and ns.prev_non_tool_role == 'assistant') -%}\n    {%- if not continue_same_model_turn -%}\n        {{- '<|turn>' + role + '\\n' }}\n    {%- endif -%}\n\n    {#- Render reasoning/reasoning_content as thinking channel -#}\n    {%- set thinking_text = message.get('reasoning') or message.get('reasoning_content') -%}\n    {%- set thinking_gate = (loop.index0 > ns_turn.last_user_idx) or (preserve_thinking and message.get('tool_calls')) -%}\n    {%- if thinking_text and thinking_gate -%}\n        {{- '<|channel>thought\\n' + thinking_text + '\\n<channel|>' -}}\n    {%- endif -%}\n\n            {%- if message.get('tool_calls') -%}\n                {%- for tool_call in message.get('tool_calls') -%}\n                    {%- set function = tool_call['function'] -%}\n                    {{- '<|tool_call>call:' + function['name'] + '{' -}}\n                    {%- if function['arguments'] is mapping -%}\n                        {%- set ns_args = namespace(found_first=false) -%}\n                        {%- for key, value in function['arguments'] | dictsort -%}\n                            {%- if ns_args.found_first %},{% endif -%}\n                            {%- set ns_args.found_first = true -%}\n                            {{- key -}}:{{- format_argument(value, escape_keys=False) -}}\n                        {%- endfor -%}\n                    {%- elif function['arguments'] is none -%}\n                    {%- elif function['arguments'] is string -%}\n                        {#- Pre-serialized args (e.g. an OpenAI JSON string). We cannot JSON-parse\n                            portably in-template, so render non-fatally instead of erroring. Strip an\n                            outer {...} so it composes with the DSL braces rather than double-wrapping.\n                            Prefer passing arguments as a mapping for exact Gemma DSL. -#}\n                        {%- set argstr = function['arguments'] | trim -%}\n                        {%- if argstr[:1] == '{' and argstr[-1:] == '}' -%}\n                            {{- argstr[1:-1] -}}\n                        {%- else -%}\n                            {{- function['arguments'] -}}\n                        {%- endif -%}\n                    {%- endif -%}\n                    {{- '}<tool_call|>' -}}\n                {%- endfor -%}\n                {%- set ns.prev_message_type = 'tool_call' -%}\n            {%- endif -%}\n\n            {%- set ns_tr_out = namespace(flag=false) -%}\n            {%- if message.get('tool_responses') -%}\n                {#- Legacy: tool_responses embedded on the assistant message (Google/Gemma native) -#}\n                {%- for tool_response in message.get('tool_responses') -%}\n                    {{- format_tool_response_block(tool_response['name'] | default('unknown', true), tool_response['response']) -}}\n                    {%- set ns_tr_out.flag = true -%}\n                    {%- set ns.prev_message_type = 'tool_response' -%}\n                {%- endfor -%}\n            {%- elif message.get('tool_calls') -%}\n                {#- OpenAI Chat Completions: forward-scan consecutive role:tool messages -#}\n                {%- set ns_tool_scan = namespace(stopped=false) -%}\n                {%- for k in range(loop.index0 + 1, loop_messages | length) -%}\n                    {%- if ns_tool_scan.stopped -%}\n                    {%- elif loop_messages[k]['role'] != 'tool' -%}\n                        {%- set ns_tool_scan.stopped = true -%}\n                    {%- else -%}\n                        {%- set follow = loop_messages[k] -%}\n                        {#- Resolve tool_call_id to function name -#}\n                        {%- set ns_tname = namespace(name=follow.get('name') or 'unknown') -%}\n                        {%- for tc in message.get('tool_calls') -%}\n                            {%- if tc.get('id') == follow.get('tool_call_id') -%}\n                                {%- set ns_tname.name = tc['function']['name'] -%}\n                            {%- endif -%}\n                        {%- endfor -%}\n                        {#- Handle content as string or content-parts array -#}\n                        {%- set tool_body = follow.get('content') -%}\n                        {%- if tool_body is string -%}\n                            {{- format_tool_response_block(ns_tname.name, tool_body) -}}\n                        {%- elif tool_body is sequence and tool_body is not string -%}\n                            {%- set ns_txt = namespace(s='') -%}\n                            {%- for part in tool_body -%}\n                                {%- if part.get('type') == 'text' -%}\n                                    {%- set ns_txt.s = ns_txt.s + (part.get('text') | default('')) -%}\n                                {%- endif -%}\n                            {%- endfor -%}\n                            {{- format_tool_response_block(ns_tname.name, ns_txt.s) -}}\n                            {%- for part in tool_body -%}\n                                {%- if part.get('type') in ['image', 'image_url'] -%}\n                                    {{- '<|image|>' -}}\n                                {%- elif part.get('type') in ['audio', 'input_audio'] -%}\n                                    {{- '<|audio|>' -}}\n                                {%- elif part.get('type') == 'video' -%}\n                                    {{- '<|video|>' -}}\n                                {%- endif -%}\n                            {%- endfor -%}\n                        {%- else -%}\n                            {{- format_tool_response_block(ns_tname.name, tool_body) -}}\n                        {%- endif -%}\n                        {%- set ns_tr_out.flag = true -%}\n                        {%- set ns.prev_message_type = 'tool_response' -%}\n                    {%- endif -%}\n                {%- endfor -%}\n            {%- endif -%}\n\n            {%- set captured_content -%}\n            {%- if message.get('content') is string -%}\n                {%- if role == 'model' -%}\n                    {{- strip_thinking(message['content']) -}}\n                {%- else -%}\n                    {{- message['content'] | trim -}}\n                {%- endif -%}\n            {%- elif message.get('content') is sequence -%}\n                {%- for item in message['content'] -%}\n                    {%- if item.get('type') == 'text' -%}\n                        {%- if role == 'model' -%}\n                            {{- strip_thinking(item['text']) -}}\n                        {%- else -%}\n                            {{- item['text'] | trim -}}\n                        {%- endif -%}\n                    {%- elif item.get('type') in ['image', 'image_url'] -%}\n                        {{- '<|image|>' -}}\n                    {%- elif item.get('type') in ['audio', 'input_audio'] -%}\n                        {{- '<|audio|>' -}}\n                    {%- elif item.get('type') == 'video' -%}\n                        {{- '<|video|>' -}}\n                    {%- endif -%}\n                {%- endfor -%}\n            {%- endif -%}\n            {%- endset -%}\n\n            {{- captured_content -}}\n            {%- set has_content = captured_content | trim | length > 0 -%}\n\n        {#- Forward-scan: find next non-tool message role for continuation detection -#}\n        {%- set next_nt = namespace(role=None, found=false) -%}\n        {%- for j in range(loop.index0 + 1, loop_messages | length) -%}\n            {%- if not next_nt.found -%}\n                {%- if loop_messages[j]['role'] != 'tool' -%}\n                    {%- set next_nt.role = loop_messages[j]['role'] -%}\n                    {%- set next_nt.found = true -%}\n                {%- endif -%}\n            {%- endif -%}\n        {%- endfor -%}\n\n        {%- set continues_into_next = (\n            role == 'model'\n            and next_nt.role == 'assistant'\n            and (not message.get('tool_calls') or ns_tr_out.flag)\n        ) -%}\n\n        {%- if ns.prev_message_type == 'tool_call' and not ns_tr_out.flag -%}\n            {{- '<|tool_response>' -}}\n        {%- elif continues_into_next -%}\n        {%- elif not (ns_tr_out.flag and not has_content and not next_nt.found) -%}\n            {{- '<turn|>\\n' -}}\n        {%- endif -%}\n\n    {#- Track previous non-tool role for next iteration (avoids O(n) backward scan) -#}\n    {%- set ns.prev_non_tool_role = message['role'] -%}\n    {%- endif -%}\n{%- endfor -%}\n\n{%- if add_generation_prompt -%}\n    {%- if ns.prev_message_type != 'tool_response' and ns.prev_message_type != 'tool_call' -%}\n        {{- '<|turn>model\\n' -}}\n    {%- elif ns.prev_message_type == 'tool_response' and enable_thinking -%}\n        {{- '<|channel>thought\\n' -}}\n    {%- endif -%}\n{%- endif -%}\n"
+    }
+  },
+  "tensors": {
+    "output_norm.weight": {
+      "index": 0,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15783915
+    },
+    "per_layer_model_proj.weight": {
+      "index": 1,
+      "shape": [
+        2560,
+        10752
+      ],
+      "type": "BF16",
+      "offset": 15783965
+    },
+    "per_layer_proj_norm.weight": {
+      "index": 2,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15784032
+    },
+    "per_layer_token_embd.weight": {
+      "index": 3,
+      "shape": [
+        10752,
+        262144
+      ],
+      "type": "Q8_0",
+      "offset": 15784090
+    },
+    "rope_freqs.weight": {
+      "index": 4,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15784157
+    },
+    "token_embd.weight": {
+      "index": 5,
+      "shape": [
+        2560,
+        262144
+      ],
+      "type": "Q8_0",
+      "offset": 15784206
+    },
+    "blk.0.attn_k.weight": {
+      "index": 6,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15784263
+    },
+    "blk.0.attn_k_norm.weight": {
+      "index": 7,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15784322
+    },
+    "blk.0.attn_norm.weight": {
+      "index": 8,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15784378
+    },
+    "blk.0.attn_output.weight": {
+      "index": 9,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15784432
+    },
+    "blk.0.attn_q.weight": {
+      "index": 10,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15784496
+    },
+    "blk.0.attn_q_norm.weight": {
+      "index": 11,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15784555
+    },
+    "blk.0.attn_v.weight": {
+      "index": 12,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15784611
+    },
+    "blk.0.ffn_down.weight": {
+      "index": 13,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15784670
+    },
+    "blk.0.ffn_gate.weight": {
+      "index": 14,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15784731
+    },
+    "blk.0.ffn_norm.weight": {
+      "index": 15,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15784792
+    },
+    "blk.0.ffn_up.weight": {
+      "index": 16,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15784845
+    },
+    "blk.0.inp_gate.weight": {
+      "index": 17,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15784904
+    },
+    "blk.0.layer_output_scale.weight": {
+      "index": 18,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15784965
+    },
+    "blk.0.post_attention_norm.weight": {
+      "index": 19,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15785028
+    },
+    "blk.0.post_ffw_norm.weight": {
+      "index": 20,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15785092
+    },
+    "blk.0.post_norm.weight": {
+      "index": 21,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15785150
+    },
+    "blk.0.proj.weight": {
+      "index": 22,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15785204
+    },
+    "blk.1.attn_k.weight": {
+      "index": 23,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15785261
+    },
+    "blk.1.attn_k_norm.weight": {
+      "index": 24,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15785320
+    },
+    "blk.1.attn_norm.weight": {
+      "index": 25,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15785376
+    },
+    "blk.1.attn_output.weight": {
+      "index": 26,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15785430
+    },
+    "blk.1.attn_q.weight": {
+      "index": 27,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15785494
+    },
+    "blk.1.attn_q_norm.weight": {
+      "index": 28,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15785553
+    },
+    "blk.1.attn_v.weight": {
+      "index": 29,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15785609
+    },
+    "blk.1.ffn_down.weight": {
+      "index": 30,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15785668
+    },
+    "blk.1.ffn_gate.weight": {
+      "index": 31,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15785729
+    },
+    "blk.1.ffn_norm.weight": {
+      "index": 32,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15785790
+    },
+    "blk.1.ffn_up.weight": {
+      "index": 33,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15785843
+    },
+    "blk.1.inp_gate.weight": {
+      "index": 34,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15785902
+    },
+    "blk.1.layer_output_scale.weight": {
+      "index": 35,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15785963
+    },
+    "blk.1.post_attention_norm.weight": {
+      "index": 36,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15786026
+    },
+    "blk.1.post_ffw_norm.weight": {
+      "index": 37,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15786090
+    },
+    "blk.1.post_norm.weight": {
+      "index": 38,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15786148
+    },
+    "blk.1.proj.weight": {
+      "index": 39,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15786202
+    },
+    "blk.2.attn_k.weight": {
+      "index": 40,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15786259
+    },
+    "blk.2.attn_k_norm.weight": {
+      "index": 41,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15786318
+    },
+    "blk.2.attn_norm.weight": {
+      "index": 42,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15786374
+    },
+    "blk.2.attn_output.weight": {
+      "index": 43,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15786428
+    },
+    "blk.2.attn_q.weight": {
+      "index": 44,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15786492
+    },
+    "blk.2.attn_q_norm.weight": {
+      "index": 45,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15786551
+    },
+    "blk.2.attn_v.weight": {
+      "index": 46,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15786607
+    },
+    "blk.2.ffn_down.weight": {
+      "index": 47,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15786666
+    },
+    "blk.2.ffn_gate.weight": {
+      "index": 48,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15786727
+    },
+    "blk.2.ffn_norm.weight": {
+      "index": 49,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15786788
+    },
+    "blk.2.ffn_up.weight": {
+      "index": 50,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15786841
+    },
+    "blk.2.inp_gate.weight": {
+      "index": 51,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15786900
+    },
+    "blk.2.layer_output_scale.weight": {
+      "index": 52,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15786961
+    },
+    "blk.2.post_attention_norm.weight": {
+      "index": 53,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15787024
+    },
+    "blk.2.post_ffw_norm.weight": {
+      "index": 54,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15787088
+    },
+    "blk.2.post_norm.weight": {
+      "index": 55,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15787146
+    },
+    "blk.2.proj.weight": {
+      "index": 56,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15787200
+    },
+    "blk.3.attn_k.weight": {
+      "index": 57,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15787257
+    },
+    "blk.3.attn_k_norm.weight": {
+      "index": 58,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15787316
+    },
+    "blk.3.attn_norm.weight": {
+      "index": 59,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15787372
+    },
+    "blk.3.attn_output.weight": {
+      "index": 60,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15787426
+    },
+    "blk.3.attn_q.weight": {
+      "index": 61,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15787490
+    },
+    "blk.3.attn_q_norm.weight": {
+      "index": 62,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15787549
+    },
+    "blk.3.attn_v.weight": {
+      "index": 63,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15787605
+    },
+    "blk.3.ffn_down.weight": {
+      "index": 64,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15787664
+    },
+    "blk.3.ffn_gate.weight": {
+      "index": 65,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15787725
+    },
+    "blk.3.ffn_norm.weight": {
+      "index": 66,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15787786
+    },
+    "blk.3.ffn_up.weight": {
+      "index": 67,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15787839
+    },
+    "blk.3.inp_gate.weight": {
+      "index": 68,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15787898
+    },
+    "blk.3.layer_output_scale.weight": {
+      "index": 69,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15787959
+    },
+    "blk.3.post_attention_norm.weight": {
+      "index": 70,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15788022
+    },
+    "blk.3.post_ffw_norm.weight": {
+      "index": 71,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15788086
+    },
+    "blk.3.post_norm.weight": {
+      "index": 72,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15788144
+    },
+    "blk.3.proj.weight": {
+      "index": 73,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15788198
+    },
+    "blk.4.attn_k.weight": {
+      "index": 74,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15788255
+    },
+    "blk.4.attn_k_norm.weight": {
+      "index": 75,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15788314
+    },
+    "blk.4.attn_norm.weight": {
+      "index": 76,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15788370
+    },
+    "blk.4.attn_output.weight": {
+      "index": 77,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15788424
+    },
+    "blk.4.attn_q.weight": {
+      "index": 78,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15788488
+    },
+    "blk.4.attn_q_norm.weight": {
+      "index": 79,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15788547
+    },
+    "blk.4.attn_v.weight": {
+      "index": 80,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15788603
+    },
+    "blk.4.ffn_down.weight": {
+      "index": 81,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15788662
+    },
+    "blk.4.ffn_gate.weight": {
+      "index": 82,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15788723
+    },
+    "blk.4.ffn_norm.weight": {
+      "index": 83,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15788784
+    },
+    "blk.4.ffn_up.weight": {
+      "index": 84,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15788837
+    },
+    "blk.4.inp_gate.weight": {
+      "index": 85,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15788896
+    },
+    "blk.4.layer_output_scale.weight": {
+      "index": 86,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15788957
+    },
+    "blk.4.post_attention_norm.weight": {
+      "index": 87,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15789020
+    },
+    "blk.4.post_ffw_norm.weight": {
+      "index": 88,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15789084
+    },
+    "blk.4.post_norm.weight": {
+      "index": 89,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15789142
+    },
+    "blk.4.proj.weight": {
+      "index": 90,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15789196
+    },
+    "blk.5.attn_k.weight": {
+      "index": 91,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15789253
+    },
+    "blk.5.attn_k_norm.weight": {
+      "index": 92,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15789312
+    },
+    "blk.5.attn_norm.weight": {
+      "index": 93,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15789368
+    },
+    "blk.5.attn_output.weight": {
+      "index": 94,
+      "shape": [
+        4096,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15789422
+    },
+    "blk.5.attn_q.weight": {
+      "index": 95,
+      "shape": [
+        2560,
+        4096
+      ],
+      "type": "Q8_0",
+      "offset": 15789486
+    },
+    "blk.5.attn_q_norm.weight": {
+      "index": 96,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15789545
+    },
+    "blk.5.attn_v.weight": {
+      "index": 97,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15789601
+    },
+    "blk.5.ffn_down.weight": {
+      "index": 98,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15789660
+    },
+    "blk.5.ffn_gate.weight": {
+      "index": 99,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15789721
+    },
+    "blk.5.ffn_norm.weight": {
+      "index": 100,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15789782
+    },
+    "blk.5.ffn_up.weight": {
+      "index": 101,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15789835
+    },
+    "blk.5.inp_gate.weight": {
+      "index": 102,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15789894
+    },
+    "blk.5.layer_output_scale.weight": {
+      "index": 103,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15789955
+    },
+    "blk.5.post_attention_norm.weight": {
+      "index": 104,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15790018
+    },
+    "blk.5.post_ffw_norm.weight": {
+      "index": 105,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15790082
+    },
+    "blk.5.post_norm.weight": {
+      "index": 106,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15790140
+    },
+    "blk.5.proj.weight": {
+      "index": 107,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15790194
+    },
+    "blk.6.attn_k.weight": {
+      "index": 108,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15790251
+    },
+    "blk.6.attn_k_norm.weight": {
+      "index": 109,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15790310
+    },
+    "blk.6.attn_norm.weight": {
+      "index": 110,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15790366
+    },
+    "blk.6.attn_output.weight": {
+      "index": 111,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15790420
+    },
+    "blk.6.attn_q.weight": {
+      "index": 112,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15790484
+    },
+    "blk.6.attn_q_norm.weight": {
+      "index": 113,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15790543
+    },
+    "blk.6.attn_v.weight": {
+      "index": 114,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15790599
+    },
+    "blk.6.ffn_down.weight": {
+      "index": 115,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15790658
+    },
+    "blk.6.ffn_gate.weight": {
+      "index": 116,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15790719
+    },
+    "blk.6.ffn_norm.weight": {
+      "index": 117,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15790780
+    },
+    "blk.6.ffn_up.weight": {
+      "index": 118,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15790833
+    },
+    "blk.6.inp_gate.weight": {
+      "index": 119,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15790892
+    },
+    "blk.6.layer_output_scale.weight": {
+      "index": 120,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15790953
+    },
+    "blk.6.post_attention_norm.weight": {
+      "index": 121,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15791016
+    },
+    "blk.6.post_ffw_norm.weight": {
+      "index": 122,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15791080
+    },
+    "blk.6.post_norm.weight": {
+      "index": 123,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15791138
+    },
+    "blk.6.proj.weight": {
+      "index": 124,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15791192
+    },
+    "blk.7.attn_k.weight": {
+      "index": 125,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15791249
+    },
+    "blk.7.attn_k_norm.weight": {
+      "index": 126,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15791308
+    },
+    "blk.7.attn_norm.weight": {
+      "index": 127,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15791364
+    },
+    "blk.7.attn_output.weight": {
+      "index": 128,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15791418
+    },
+    "blk.7.attn_q.weight": {
+      "index": 129,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15791482
+    },
+    "blk.7.attn_q_norm.weight": {
+      "index": 130,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15791541
+    },
+    "blk.7.attn_v.weight": {
+      "index": 131,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15791597
+    },
+    "blk.7.ffn_down.weight": {
+      "index": 132,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15791656
+    },
+    "blk.7.ffn_gate.weight": {
+      "index": 133,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15791717
+    },
+    "blk.7.ffn_norm.weight": {
+      "index": 134,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15791778
+    },
+    "blk.7.ffn_up.weight": {
+      "index": 135,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15791831
+    },
+    "blk.7.inp_gate.weight": {
+      "index": 136,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15791890
+    },
+    "blk.7.layer_output_scale.weight": {
+      "index": 137,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15791951
+    },
+    "blk.7.post_attention_norm.weight": {
+      "index": 138,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15792014
+    },
+    "blk.7.post_ffw_norm.weight": {
+      "index": 139,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15792078
+    },
+    "blk.7.post_norm.weight": {
+      "index": 140,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15792136
+    },
+    "blk.7.proj.weight": {
+      "index": 141,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15792190
+    },
+    "blk.8.attn_k.weight": {
+      "index": 142,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15792247
+    },
+    "blk.8.attn_k_norm.weight": {
+      "index": 143,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15792306
+    },
+    "blk.8.attn_norm.weight": {
+      "index": 144,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15792362
+    },
+    "blk.8.attn_output.weight": {
+      "index": 145,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15792416
+    },
+    "blk.8.attn_q.weight": {
+      "index": 146,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15792480
+    },
+    "blk.8.attn_q_norm.weight": {
+      "index": 147,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15792539
+    },
+    "blk.8.attn_v.weight": {
+      "index": 148,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15792595
+    },
+    "blk.8.ffn_down.weight": {
+      "index": 149,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15792654
+    },
+    "blk.8.ffn_gate.weight": {
+      "index": 150,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15792715
+    },
+    "blk.8.ffn_norm.weight": {
+      "index": 151,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15792776
+    },
+    "blk.8.ffn_up.weight": {
+      "index": 152,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15792829
+    },
+    "blk.8.inp_gate.weight": {
+      "index": 153,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15792888
+    },
+    "blk.8.layer_output_scale.weight": {
+      "index": 154,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15792949
+    },
+    "blk.8.post_attention_norm.weight": {
+      "index": 155,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15793012
+    },
+    "blk.8.post_ffw_norm.weight": {
+      "index": 156,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15793076
+    },
+    "blk.8.post_norm.weight": {
+      "index": 157,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15793134
+    },
+    "blk.8.proj.weight": {
+      "index": 158,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15793188
+    },
+    "blk.9.attn_k.weight": {
+      "index": 159,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15793245
+    },
+    "blk.9.attn_k_norm.weight": {
+      "index": 160,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15793304
+    },
+    "blk.9.attn_norm.weight": {
+      "index": 161,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15793360
+    },
+    "blk.9.attn_output.weight": {
+      "index": 162,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15793414
+    },
+    "blk.9.attn_q.weight": {
+      "index": 163,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15793478
+    },
+    "blk.9.attn_q_norm.weight": {
+      "index": 164,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15793537
+    },
+    "blk.9.attn_v.weight": {
+      "index": 165,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15793593
+    },
+    "blk.9.ffn_down.weight": {
+      "index": 166,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15793652
+    },
+    "blk.9.ffn_gate.weight": {
+      "index": 167,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15793713
+    },
+    "blk.9.ffn_norm.weight": {
+      "index": 168,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15793774
+    },
+    "blk.9.ffn_up.weight": {
+      "index": 169,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15793827
+    },
+    "blk.9.inp_gate.weight": {
+      "index": 170,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15793886
+    },
+    "blk.9.layer_output_scale.weight": {
+      "index": 171,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15793947
+    },
+    "blk.9.post_attention_norm.weight": {
+      "index": 172,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15794010
+    },
+    "blk.9.post_ffw_norm.weight": {
+      "index": 173,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15794074
+    },
+    "blk.9.post_norm.weight": {
+      "index": 174,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15794132
+    },
+    "blk.9.proj.weight": {
+      "index": 175,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15794186
+    },
+    "blk.10.attn_k.weight": {
+      "index": 176,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15794243
+    },
+    "blk.10.attn_k_norm.weight": {
+      "index": 177,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15794303
+    },
+    "blk.10.attn_norm.weight": {
+      "index": 178,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15794360
+    },
+    "blk.10.attn_output.weight": {
+      "index": 179,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15794415
+    },
+    "blk.10.attn_q.weight": {
+      "index": 180,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15794480
+    },
+    "blk.10.attn_q_norm.weight": {
+      "index": 181,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15794540
+    },
+    "blk.10.attn_v.weight": {
+      "index": 182,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15794597
+    },
+    "blk.10.ffn_down.weight": {
+      "index": 183,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15794657
+    },
+    "blk.10.ffn_gate.weight": {
+      "index": 184,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15794719
+    },
+    "blk.10.ffn_norm.weight": {
+      "index": 185,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15794781
+    },
+    "blk.10.ffn_up.weight": {
+      "index": 186,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15794835
+    },
+    "blk.10.inp_gate.weight": {
+      "index": 187,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15794895
+    },
+    "blk.10.layer_output_scale.weight": {
+      "index": 188,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15794957
+    },
+    "blk.10.post_attention_norm.weight": {
+      "index": 189,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15795021
+    },
+    "blk.10.post_ffw_norm.weight": {
+      "index": 190,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15795086
+    },
+    "blk.10.post_norm.weight": {
+      "index": 191,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15795145
+    },
+    "blk.10.proj.weight": {
+      "index": 192,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15795200
+    },
+    "blk.11.attn_k.weight": {
+      "index": 193,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15795258
+    },
+    "blk.11.attn_k_norm.weight": {
+      "index": 194,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15795318
+    },
+    "blk.11.attn_norm.weight": {
+      "index": 195,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15795375
+    },
+    "blk.11.attn_output.weight": {
+      "index": 196,
+      "shape": [
+        4096,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15795430
+    },
+    "blk.11.attn_q.weight": {
+      "index": 197,
+      "shape": [
+        2560,
+        4096
+      ],
+      "type": "Q8_0",
+      "offset": 15795495
+    },
+    "blk.11.attn_q_norm.weight": {
+      "index": 198,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15795555
+    },
+    "blk.11.attn_v.weight": {
+      "index": 199,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15795612
+    },
+    "blk.11.ffn_down.weight": {
+      "index": 200,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15795672
+    },
+    "blk.11.ffn_gate.weight": {
+      "index": 201,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15795734
+    },
+    "blk.11.ffn_norm.weight": {
+      "index": 202,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15795796
+    },
+    "blk.11.ffn_up.weight": {
+      "index": 203,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15795850
+    },
+    "blk.11.inp_gate.weight": {
+      "index": 204,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15795910
+    },
+    "blk.11.layer_output_scale.weight": {
+      "index": 205,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15795972
+    },
+    "blk.11.post_attention_norm.weight": {
+      "index": 206,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15796036
+    },
+    "blk.11.post_ffw_norm.weight": {
+      "index": 207,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15796101
+    },
+    "blk.11.post_norm.weight": {
+      "index": 208,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15796160
+    },
+    "blk.11.proj.weight": {
+      "index": 209,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15796215
+    },
+    "blk.12.attn_k.weight": {
+      "index": 210,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15796273
+    },
+    "blk.12.attn_k_norm.weight": {
+      "index": 211,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15796333
+    },
+    "blk.12.attn_norm.weight": {
+      "index": 212,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15796390
+    },
+    "blk.12.attn_output.weight": {
+      "index": 213,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15796445
+    },
+    "blk.12.attn_q.weight": {
+      "index": 214,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15796510
+    },
+    "blk.12.attn_q_norm.weight": {
+      "index": 215,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15796570
+    },
+    "blk.12.attn_v.weight": {
+      "index": 216,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15796627
+    },
+    "blk.12.ffn_down.weight": {
+      "index": 217,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15796687
+    },
+    "blk.12.ffn_gate.weight": {
+      "index": 218,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15796749
+    },
+    "blk.12.ffn_norm.weight": {
+      "index": 219,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15796811
+    },
+    "blk.12.ffn_up.weight": {
+      "index": 220,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15796865
+    },
+    "blk.12.inp_gate.weight": {
+      "index": 221,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15796925
+    },
+    "blk.12.layer_output_scale.weight": {
+      "index": 222,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15796987
+    },
+    "blk.12.post_attention_norm.weight": {
+      "index": 223,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15797051
+    },
+    "blk.12.post_ffw_norm.weight": {
+      "index": 224,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15797116
+    },
+    "blk.12.post_norm.weight": {
+      "index": 225,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15797175
+    },
+    "blk.12.proj.weight": {
+      "index": 226,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15797230
+    },
+    "blk.13.attn_k.weight": {
+      "index": 227,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15797288
+    },
+    "blk.13.attn_k_norm.weight": {
+      "index": 228,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15797348
+    },
+    "blk.13.attn_norm.weight": {
+      "index": 229,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15797405
+    },
+    "blk.13.attn_output.weight": {
+      "index": 230,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15797460
+    },
+    "blk.13.attn_q.weight": {
+      "index": 231,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15797525
+    },
+    "blk.13.attn_q_norm.weight": {
+      "index": 232,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15797585
+    },
+    "blk.13.attn_v.weight": {
+      "index": 233,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15797642
+    },
+    "blk.13.ffn_down.weight": {
+      "index": 234,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15797702
+    },
+    "blk.13.ffn_gate.weight": {
+      "index": 235,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15797764
+    },
+    "blk.13.ffn_norm.weight": {
+      "index": 236,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15797826
+    },
+    "blk.13.ffn_up.weight": {
+      "index": 237,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15797880
+    },
+    "blk.13.inp_gate.weight": {
+      "index": 238,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15797940
+    },
+    "blk.13.layer_output_scale.weight": {
+      "index": 239,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15798002
+    },
+    "blk.13.post_attention_norm.weight": {
+      "index": 240,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15798066
+    },
+    "blk.13.post_ffw_norm.weight": {
+      "index": 241,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15798131
+    },
+    "blk.13.post_norm.weight": {
+      "index": 242,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15798190
+    },
+    "blk.13.proj.weight": {
+      "index": 243,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15798245
+    },
+    "blk.14.attn_k.weight": {
+      "index": 244,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15798303
+    },
+    "blk.14.attn_k_norm.weight": {
+      "index": 245,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15798363
+    },
+    "blk.14.attn_norm.weight": {
+      "index": 246,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15798420
+    },
+    "blk.14.attn_output.weight": {
+      "index": 247,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15798475
+    },
+    "blk.14.attn_q.weight": {
+      "index": 248,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15798540
+    },
+    "blk.14.attn_q_norm.weight": {
+      "index": 249,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15798600
+    },
+    "blk.14.attn_v.weight": {
+      "index": 250,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15798657
+    },
+    "blk.14.ffn_down.weight": {
+      "index": 251,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15798717
+    },
+    "blk.14.ffn_gate.weight": {
+      "index": 252,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15798779
+    },
+    "blk.14.ffn_norm.weight": {
+      "index": 253,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15798841
+    },
+    "blk.14.ffn_up.weight": {
+      "index": 254,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15798895
+    },
+    "blk.14.inp_gate.weight": {
+      "index": 255,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15798955
+    },
+    "blk.14.layer_output_scale.weight": {
+      "index": 256,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15799017
+    },
+    "blk.14.post_attention_norm.weight": {
+      "index": 257,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15799081
+    },
+    "blk.14.post_ffw_norm.weight": {
+      "index": 258,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15799146
+    },
+    "blk.14.post_norm.weight": {
+      "index": 259,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15799205
+    },
+    "blk.14.proj.weight": {
+      "index": 260,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15799260
+    },
+    "blk.15.attn_k.weight": {
+      "index": 261,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15799318
+    },
+    "blk.15.attn_k_norm.weight": {
+      "index": 262,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15799378
+    },
+    "blk.15.attn_norm.weight": {
+      "index": 263,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15799435
+    },
+    "blk.15.attn_output.weight": {
+      "index": 264,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15799490
+    },
+    "blk.15.attn_q.weight": {
+      "index": 265,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15799555
+    },
+    "blk.15.attn_q_norm.weight": {
+      "index": 266,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15799615
+    },
+    "blk.15.attn_v.weight": {
+      "index": 267,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15799672
+    },
+    "blk.15.ffn_down.weight": {
+      "index": 268,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15799732
+    },
+    "blk.15.ffn_gate.weight": {
+      "index": 269,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15799794
+    },
+    "blk.15.ffn_norm.weight": {
+      "index": 270,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15799856
+    },
+    "blk.15.ffn_up.weight": {
+      "index": 271,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15799910
+    },
+    "blk.15.inp_gate.weight": {
+      "index": 272,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15799970
+    },
+    "blk.15.layer_output_scale.weight": {
+      "index": 273,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15800032
+    },
+    "blk.15.post_attention_norm.weight": {
+      "index": 274,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15800096
+    },
+    "blk.15.post_ffw_norm.weight": {
+      "index": 275,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15800161
+    },
+    "blk.15.post_norm.weight": {
+      "index": 276,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15800220
+    },
+    "blk.15.proj.weight": {
+      "index": 277,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15800275
+    },
+    "blk.16.attn_k.weight": {
+      "index": 278,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15800333
+    },
+    "blk.16.attn_k_norm.weight": {
+      "index": 279,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15800393
+    },
+    "blk.16.attn_norm.weight": {
+      "index": 280,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15800450
+    },
+    "blk.16.attn_output.weight": {
+      "index": 281,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15800505
+    },
+    "blk.16.attn_q.weight": {
+      "index": 282,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15800570
+    },
+    "blk.16.attn_q_norm.weight": {
+      "index": 283,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15800630
+    },
+    "blk.16.attn_v.weight": {
+      "index": 284,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15800687
+    },
+    "blk.16.ffn_down.weight": {
+      "index": 285,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15800747
+    },
+    "blk.16.ffn_gate.weight": {
+      "index": 286,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15800809
+    },
+    "blk.16.ffn_norm.weight": {
+      "index": 287,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15800871
+    },
+    "blk.16.ffn_up.weight": {
+      "index": 288,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15800925
+    },
+    "blk.16.inp_gate.weight": {
+      "index": 289,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15800985
+    },
+    "blk.16.layer_output_scale.weight": {
+      "index": 290,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15801047
+    },
+    "blk.16.post_attention_norm.weight": {
+      "index": 291,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15801111
+    },
+    "blk.16.post_ffw_norm.weight": {
+      "index": 292,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15801176
+    },
+    "blk.16.post_norm.weight": {
+      "index": 293,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15801235
+    },
+    "blk.16.proj.weight": {
+      "index": 294,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15801290
+    },
+    "blk.17.attn_k.weight": {
+      "index": 295,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15801348
+    },
+    "blk.17.attn_k_norm.weight": {
+      "index": 296,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15801408
+    },
+    "blk.17.attn_norm.weight": {
+      "index": 297,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15801465
+    },
+    "blk.17.attn_output.weight": {
+      "index": 298,
+      "shape": [
+        4096,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15801520
+    },
+    "blk.17.attn_q.weight": {
+      "index": 299,
+      "shape": [
+        2560,
+        4096
+      ],
+      "type": "Q8_0",
+      "offset": 15801585
+    },
+    "blk.17.attn_q_norm.weight": {
+      "index": 300,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15801645
+    },
+    "blk.17.attn_v.weight": {
+      "index": 301,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15801702
+    },
+    "blk.17.ffn_down.weight": {
+      "index": 302,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15801762
+    },
+    "blk.17.ffn_gate.weight": {
+      "index": 303,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15801824
+    },
+    "blk.17.ffn_norm.weight": {
+      "index": 304,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15801886
+    },
+    "blk.17.ffn_up.weight": {
+      "index": 305,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15801940
+    },
+    "blk.17.inp_gate.weight": {
+      "index": 306,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15802000
+    },
+    "blk.17.layer_output_scale.weight": {
+      "index": 307,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15802062
+    },
+    "blk.17.post_attention_norm.weight": {
+      "index": 308,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15802126
+    },
+    "blk.17.post_ffw_norm.weight": {
+      "index": 309,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15802191
+    },
+    "blk.17.post_norm.weight": {
+      "index": 310,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15802250
+    },
+    "blk.17.proj.weight": {
+      "index": 311,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15802305
+    },
+    "blk.18.attn_k.weight": {
+      "index": 312,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15802363
+    },
+    "blk.18.attn_k_norm.weight": {
+      "index": 313,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15802423
+    },
+    "blk.18.attn_norm.weight": {
+      "index": 314,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15802480
+    },
+    "blk.18.attn_output.weight": {
+      "index": 315,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15802535
+    },
+    "blk.18.attn_q.weight": {
+      "index": 316,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15802600
+    },
+    "blk.18.attn_q_norm.weight": {
+      "index": 317,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15802660
+    },
+    "blk.18.attn_v.weight": {
+      "index": 318,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15802717
+    },
+    "blk.18.ffn_down.weight": {
+      "index": 319,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15802777
+    },
+    "blk.18.ffn_gate.weight": {
+      "index": 320,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15802839
+    },
+    "blk.18.ffn_norm.weight": {
+      "index": 321,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15802901
+    },
+    "blk.18.ffn_up.weight": {
+      "index": 322,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15802955
+    },
+    "blk.18.inp_gate.weight": {
+      "index": 323,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15803015
+    },
+    "blk.18.layer_output_scale.weight": {
+      "index": 324,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15803077
+    },
+    "blk.18.post_attention_norm.weight": {
+      "index": 325,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15803141
+    },
+    "blk.18.post_ffw_norm.weight": {
+      "index": 326,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15803206
+    },
+    "blk.18.post_norm.weight": {
+      "index": 327,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15803265
+    },
+    "blk.18.proj.weight": {
+      "index": 328,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15803320
+    },
+    "blk.19.attn_k.weight": {
+      "index": 329,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15803378
+    },
+    "blk.19.attn_k_norm.weight": {
+      "index": 330,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15803438
+    },
+    "blk.19.attn_norm.weight": {
+      "index": 331,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15803495
+    },
+    "blk.19.attn_output.weight": {
+      "index": 332,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15803550
+    },
+    "blk.19.attn_q.weight": {
+      "index": 333,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15803615
+    },
+    "blk.19.attn_q_norm.weight": {
+      "index": 334,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15803675
+    },
+    "blk.19.attn_v.weight": {
+      "index": 335,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15803732
+    },
+    "blk.19.ffn_down.weight": {
+      "index": 336,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15803792
+    },
+    "blk.19.ffn_gate.weight": {
+      "index": 337,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15803854
+    },
+    "blk.19.ffn_norm.weight": {
+      "index": 338,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15803916
+    },
+    "blk.19.ffn_up.weight": {
+      "index": 339,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15803970
+    },
+    "blk.19.inp_gate.weight": {
+      "index": 340,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15804030
+    },
+    "blk.19.layer_output_scale.weight": {
+      "index": 341,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15804092
+    },
+    "blk.19.post_attention_norm.weight": {
+      "index": 342,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15804156
+    },
+    "blk.19.post_ffw_norm.weight": {
+      "index": 343,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15804221
+    },
+    "blk.19.post_norm.weight": {
+      "index": 344,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15804280
+    },
+    "blk.19.proj.weight": {
+      "index": 345,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15804335
+    },
+    "blk.20.attn_k.weight": {
+      "index": 346,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15804393
+    },
+    "blk.20.attn_k_norm.weight": {
+      "index": 347,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15804453
+    },
+    "blk.20.attn_norm.weight": {
+      "index": 348,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15804510
+    },
+    "blk.20.attn_output.weight": {
+      "index": 349,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15804565
+    },
+    "blk.20.attn_q.weight": {
+      "index": 350,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15804630
+    },
+    "blk.20.attn_q_norm.weight": {
+      "index": 351,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15804690
+    },
+    "blk.20.attn_v.weight": {
+      "index": 352,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15804747
+    },
+    "blk.20.ffn_down.weight": {
+      "index": 353,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15804807
+    },
+    "blk.20.ffn_gate.weight": {
+      "index": 354,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15804869
+    },
+    "blk.20.ffn_norm.weight": {
+      "index": 355,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15804931
+    },
+    "blk.20.ffn_up.weight": {
+      "index": 356,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15804985
+    },
+    "blk.20.inp_gate.weight": {
+      "index": 357,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15805045
+    },
+    "blk.20.layer_output_scale.weight": {
+      "index": 358,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15805107
+    },
+    "blk.20.post_attention_norm.weight": {
+      "index": 359,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15805171
+    },
+    "blk.20.post_ffw_norm.weight": {
+      "index": 360,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15805236
+    },
+    "blk.20.post_norm.weight": {
+      "index": 361,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15805295
+    },
+    "blk.20.proj.weight": {
+      "index": 362,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15805350
+    },
+    "blk.21.attn_k.weight": {
+      "index": 363,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15805408
+    },
+    "blk.21.attn_k_norm.weight": {
+      "index": 364,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15805468
+    },
+    "blk.21.attn_norm.weight": {
+      "index": 365,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15805525
+    },
+    "blk.21.attn_output.weight": {
+      "index": 366,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15805580
+    },
+    "blk.21.attn_q.weight": {
+      "index": 367,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15805645
+    },
+    "blk.21.attn_q_norm.weight": {
+      "index": 368,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15805705
+    },
+    "blk.21.attn_v.weight": {
+      "index": 369,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15805762
+    },
+    "blk.21.ffn_down.weight": {
+      "index": 370,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15805822
+    },
+    "blk.21.ffn_gate.weight": {
+      "index": 371,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15805884
+    },
+    "blk.21.ffn_norm.weight": {
+      "index": 372,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15805946
+    },
+    "blk.21.ffn_up.weight": {
+      "index": 373,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15806000
+    },
+    "blk.21.inp_gate.weight": {
+      "index": 374,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15806060
+    },
+    "blk.21.layer_output_scale.weight": {
+      "index": 375,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15806122
+    },
+    "blk.21.post_attention_norm.weight": {
+      "index": 376,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15806186
+    },
+    "blk.21.post_ffw_norm.weight": {
+      "index": 377,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15806251
+    },
+    "blk.21.post_norm.weight": {
+      "index": 378,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15806310
+    },
+    "blk.21.proj.weight": {
+      "index": 379,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15806365
+    },
+    "blk.22.attn_k.weight": {
+      "index": 380,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15806423
+    },
+    "blk.22.attn_k_norm.weight": {
+      "index": 381,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15806483
+    },
+    "blk.22.attn_norm.weight": {
+      "index": 382,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15806540
+    },
+    "blk.22.attn_output.weight": {
+      "index": 383,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15806595
+    },
+    "blk.22.attn_q.weight": {
+      "index": 384,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15806660
+    },
+    "blk.22.attn_q_norm.weight": {
+      "index": 385,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15806720
+    },
+    "blk.22.attn_v.weight": {
+      "index": 386,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15806777
+    },
+    "blk.22.ffn_down.weight": {
+      "index": 387,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15806837
+    },
+    "blk.22.ffn_gate.weight": {
+      "index": 388,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15806899
+    },
+    "blk.22.ffn_norm.weight": {
+      "index": 389,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15806961
+    },
+    "blk.22.ffn_up.weight": {
+      "index": 390,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15807015
+    },
+    "blk.22.inp_gate.weight": {
+      "index": 391,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15807075
+    },
+    "blk.22.layer_output_scale.weight": {
+      "index": 392,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15807137
+    },
+    "blk.22.post_attention_norm.weight": {
+      "index": 393,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15807201
+    },
+    "blk.22.post_ffw_norm.weight": {
+      "index": 394,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15807266
+    },
+    "blk.22.post_norm.weight": {
+      "index": 395,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15807325
+    },
+    "blk.22.proj.weight": {
+      "index": 396,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15807380
+    },
+    "blk.23.attn_k.weight": {
+      "index": 397,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15807438
+    },
+    "blk.23.attn_k_norm.weight": {
+      "index": 398,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15807498
+    },
+    "blk.23.attn_norm.weight": {
+      "index": 399,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15807555
+    },
+    "blk.23.attn_output.weight": {
+      "index": 400,
+      "shape": [
+        4096,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15807610
+    },
+    "blk.23.attn_q.weight": {
+      "index": 401,
+      "shape": [
+        2560,
+        4096
+      ],
+      "type": "Q8_0",
+      "offset": 15807675
+    },
+    "blk.23.attn_q_norm.weight": {
+      "index": 402,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15807735
+    },
+    "blk.23.attn_v.weight": {
+      "index": 403,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15807792
+    },
+    "blk.23.ffn_down.weight": {
+      "index": 404,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15807852
+    },
+    "blk.23.ffn_gate.weight": {
+      "index": 405,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15807914
+    },
+    "blk.23.ffn_norm.weight": {
+      "index": 406,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15807976
+    },
+    "blk.23.ffn_up.weight": {
+      "index": 407,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15808030
+    },
+    "blk.23.inp_gate.weight": {
+      "index": 408,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15808090
+    },
+    "blk.23.layer_output_scale.weight": {
+      "index": 409,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15808152
+    },
+    "blk.23.post_attention_norm.weight": {
+      "index": 410,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15808216
+    },
+    "blk.23.post_ffw_norm.weight": {
+      "index": 411,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15808281
+    },
+    "blk.23.post_norm.weight": {
+      "index": 412,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15808340
+    },
+    "blk.23.proj.weight": {
+      "index": 413,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15808395
+    },
+    "blk.24.attn_k.weight": {
+      "index": 414,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15808453
+    },
+    "blk.24.attn_k_norm.weight": {
+      "index": 415,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15808513
+    },
+    "blk.24.attn_norm.weight": {
+      "index": 416,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15808570
+    },
+    "blk.24.attn_output.weight": {
+      "index": 417,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15808625
+    },
+    "blk.24.attn_q.weight": {
+      "index": 418,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15808690
+    },
+    "blk.24.attn_q_norm.weight": {
+      "index": 419,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15808750
+    },
+    "blk.24.attn_v.weight": {
+      "index": 420,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15808807
+    },
+    "blk.24.ffn_down.weight": {
+      "index": 421,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15808867
+    },
+    "blk.24.ffn_gate.weight": {
+      "index": 422,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15808929
+    },
+    "blk.24.ffn_norm.weight": {
+      "index": 423,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15808991
+    },
+    "blk.24.ffn_up.weight": {
+      "index": 424,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15809045
+    },
+    "blk.24.inp_gate.weight": {
+      "index": 425,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15809105
+    },
+    "blk.24.layer_output_scale.weight": {
+      "index": 426,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15809167
+    },
+    "blk.24.post_attention_norm.weight": {
+      "index": 427,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15809231
+    },
+    "blk.24.post_ffw_norm.weight": {
+      "index": 428,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15809296
+    },
+    "blk.24.post_norm.weight": {
+      "index": 429,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15809355
+    },
+    "blk.24.proj.weight": {
+      "index": 430,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15809410
+    },
+    "blk.25.attn_k.weight": {
+      "index": 431,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15809468
+    },
+    "blk.25.attn_k_norm.weight": {
+      "index": 432,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15809528
+    },
+    "blk.25.attn_norm.weight": {
+      "index": 433,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15809585
+    },
+    "blk.25.attn_output.weight": {
+      "index": 434,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15809640
+    },
+    "blk.25.attn_q.weight": {
+      "index": 435,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15809705
+    },
+    "blk.25.attn_q_norm.weight": {
+      "index": 436,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15809765
+    },
+    "blk.25.attn_v.weight": {
+      "index": 437,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15809822
+    },
+    "blk.25.ffn_down.weight": {
+      "index": 438,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15809882
+    },
+    "blk.25.ffn_gate.weight": {
+      "index": 439,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15809944
+    },
+    "blk.25.ffn_norm.weight": {
+      "index": 440,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15810006
+    },
+    "blk.25.ffn_up.weight": {
+      "index": 441,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15810060
+    },
+    "blk.25.inp_gate.weight": {
+      "index": 442,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15810120
+    },
+    "blk.25.layer_output_scale.weight": {
+      "index": 443,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15810182
+    },
+    "blk.25.post_attention_norm.weight": {
+      "index": 444,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15810246
+    },
+    "blk.25.post_ffw_norm.weight": {
+      "index": 445,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15810311
+    },
+    "blk.25.post_norm.weight": {
+      "index": 446,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15810370
+    },
+    "blk.25.proj.weight": {
+      "index": 447,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15810425
+    },
+    "blk.26.attn_k.weight": {
+      "index": 448,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15810483
+    },
+    "blk.26.attn_k_norm.weight": {
+      "index": 449,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15810543
+    },
+    "blk.26.attn_norm.weight": {
+      "index": 450,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15810600
+    },
+    "blk.26.attn_output.weight": {
+      "index": 451,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15810655
+    },
+    "blk.26.attn_q.weight": {
+      "index": 452,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15810720
+    },
+    "blk.26.attn_q_norm.weight": {
+      "index": 453,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15810780
+    },
+    "blk.26.attn_v.weight": {
+      "index": 454,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15810837
+    },
+    "blk.26.ffn_down.weight": {
+      "index": 455,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15810897
+    },
+    "blk.26.ffn_gate.weight": {
+      "index": 456,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15810959
+    },
+    "blk.26.ffn_norm.weight": {
+      "index": 457,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15811021
+    },
+    "blk.26.ffn_up.weight": {
+      "index": 458,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15811075
+    },
+    "blk.26.inp_gate.weight": {
+      "index": 459,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15811135
+    },
+    "blk.26.layer_output_scale.weight": {
+      "index": 460,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15811197
+    },
+    "blk.26.post_attention_norm.weight": {
+      "index": 461,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15811261
+    },
+    "blk.26.post_ffw_norm.weight": {
+      "index": 462,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15811326
+    },
+    "blk.26.post_norm.weight": {
+      "index": 463,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15811385
+    },
+    "blk.26.proj.weight": {
+      "index": 464,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15811440
+    },
+    "blk.27.attn_k.weight": {
+      "index": 465,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15811498
+    },
+    "blk.27.attn_k_norm.weight": {
+      "index": 466,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15811558
+    },
+    "blk.27.attn_norm.weight": {
+      "index": 467,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15811615
+    },
+    "blk.27.attn_output.weight": {
+      "index": 468,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15811670
+    },
+    "blk.27.attn_q.weight": {
+      "index": 469,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15811735
+    },
+    "blk.27.attn_q_norm.weight": {
+      "index": 470,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15811795
+    },
+    "blk.27.attn_v.weight": {
+      "index": 471,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15811852
+    },
+    "blk.27.ffn_down.weight": {
+      "index": 472,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15811912
+    },
+    "blk.27.ffn_gate.weight": {
+      "index": 473,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15811974
+    },
+    "blk.27.ffn_norm.weight": {
+      "index": 474,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15812036
+    },
+    "blk.27.ffn_up.weight": {
+      "index": 475,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15812090
+    },
+    "blk.27.inp_gate.weight": {
+      "index": 476,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15812150
+    },
+    "blk.27.layer_output_scale.weight": {
+      "index": 477,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15812212
+    },
+    "blk.27.post_attention_norm.weight": {
+      "index": 478,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15812276
+    },
+    "blk.27.post_ffw_norm.weight": {
+      "index": 479,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15812341
+    },
+    "blk.27.post_norm.weight": {
+      "index": 480,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15812400
+    },
+    "blk.27.proj.weight": {
+      "index": 481,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15812455
+    },
+    "blk.28.attn_k.weight": {
+      "index": 482,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15812513
+    },
+    "blk.28.attn_k_norm.weight": {
+      "index": 483,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15812573
+    },
+    "blk.28.attn_norm.weight": {
+      "index": 484,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15812630
+    },
+    "blk.28.attn_output.weight": {
+      "index": 485,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15812685
+    },
+    "blk.28.attn_q.weight": {
+      "index": 486,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15812750
+    },
+    "blk.28.attn_q_norm.weight": {
+      "index": 487,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15812810
+    },
+    "blk.28.attn_v.weight": {
+      "index": 488,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15812867
+    },
+    "blk.28.ffn_down.weight": {
+      "index": 489,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15812927
+    },
+    "blk.28.ffn_gate.weight": {
+      "index": 490,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15812989
+    },
+    "blk.28.ffn_norm.weight": {
+      "index": 491,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15813051
+    },
+    "blk.28.ffn_up.weight": {
+      "index": 492,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15813105
+    },
+    "blk.28.inp_gate.weight": {
+      "index": 493,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15813165
+    },
+    "blk.28.layer_output_scale.weight": {
+      "index": 494,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15813227
+    },
+    "blk.28.post_attention_norm.weight": {
+      "index": 495,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15813291
+    },
+    "blk.28.post_ffw_norm.weight": {
+      "index": 496,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15813356
+    },
+    "blk.28.post_norm.weight": {
+      "index": 497,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15813415
+    },
+    "blk.28.proj.weight": {
+      "index": 498,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15813470
+    },
+    "blk.29.attn_k.weight": {
+      "index": 499,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15813528
+    },
+    "blk.29.attn_k_norm.weight": {
+      "index": 500,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15813588
+    },
+    "blk.29.attn_norm.weight": {
+      "index": 501,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15813645
+    },
+    "blk.29.attn_output.weight": {
+      "index": 502,
+      "shape": [
+        4096,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15813700
+    },
+    "blk.29.attn_q.weight": {
+      "index": 503,
+      "shape": [
+        2560,
+        4096
+      ],
+      "type": "Q8_0",
+      "offset": 15813765
+    },
+    "blk.29.attn_q_norm.weight": {
+      "index": 504,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15813825
+    },
+    "blk.29.attn_v.weight": {
+      "index": 505,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15813882
+    },
+    "blk.29.ffn_down.weight": {
+      "index": 506,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15813942
+    },
+    "blk.29.ffn_gate.weight": {
+      "index": 507,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15814004
+    },
+    "blk.29.ffn_norm.weight": {
+      "index": 508,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15814066
+    },
+    "blk.29.ffn_up.weight": {
+      "index": 509,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15814120
+    },
+    "blk.29.inp_gate.weight": {
+      "index": 510,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15814180
+    },
+    "blk.29.layer_output_scale.weight": {
+      "index": 511,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15814242
+    },
+    "blk.29.post_attention_norm.weight": {
+      "index": 512,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15814306
+    },
+    "blk.29.post_ffw_norm.weight": {
+      "index": 513,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15814371
+    },
+    "blk.29.post_norm.weight": {
+      "index": 514,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15814430
+    },
+    "blk.29.proj.weight": {
+      "index": 515,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15814485
+    },
+    "blk.30.attn_k.weight": {
+      "index": 516,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15814543
+    },
+    "blk.30.attn_k_norm.weight": {
+      "index": 517,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15814603
+    },
+    "blk.30.attn_norm.weight": {
+      "index": 518,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15814660
+    },
+    "blk.30.attn_output.weight": {
+      "index": 519,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15814715
+    },
+    "blk.30.attn_q.weight": {
+      "index": 520,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15814780
+    },
+    "blk.30.attn_q_norm.weight": {
+      "index": 521,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15814840
+    },
+    "blk.30.attn_v.weight": {
+      "index": 522,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15814897
+    },
+    "blk.30.ffn_down.weight": {
+      "index": 523,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15814957
+    },
+    "blk.30.ffn_gate.weight": {
+      "index": 524,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15815019
+    },
+    "blk.30.ffn_norm.weight": {
+      "index": 525,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15815081
+    },
+    "blk.30.ffn_up.weight": {
+      "index": 526,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15815135
+    },
+    "blk.30.inp_gate.weight": {
+      "index": 527,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15815195
+    },
+    "blk.30.layer_output_scale.weight": {
+      "index": 528,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15815257
+    },
+    "blk.30.post_attention_norm.weight": {
+      "index": 529,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15815321
+    },
+    "blk.30.post_ffw_norm.weight": {
+      "index": 530,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15815386
+    },
+    "blk.30.post_norm.weight": {
+      "index": 531,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15815445
+    },
+    "blk.30.proj.weight": {
+      "index": 532,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15815500
+    },
+    "blk.31.attn_k.weight": {
+      "index": 533,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15815558
+    },
+    "blk.31.attn_k_norm.weight": {
+      "index": 534,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15815618
+    },
+    "blk.31.attn_norm.weight": {
+      "index": 535,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15815675
+    },
+    "blk.31.attn_output.weight": {
+      "index": 536,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15815730
+    },
+    "blk.31.attn_q.weight": {
+      "index": 537,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15815795
+    },
+    "blk.31.attn_q_norm.weight": {
+      "index": 538,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15815855
+    },
+    "blk.31.attn_v.weight": {
+      "index": 539,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15815912
+    },
+    "blk.31.ffn_down.weight": {
+      "index": 540,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15815972
+    },
+    "blk.31.ffn_gate.weight": {
+      "index": 541,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15816034
+    },
+    "blk.31.ffn_norm.weight": {
+      "index": 542,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15816096
+    },
+    "blk.31.ffn_up.weight": {
+      "index": 543,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15816150
+    },
+    "blk.31.inp_gate.weight": {
+      "index": 544,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15816210
+    },
+    "blk.31.layer_output_scale.weight": {
+      "index": 545,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15816272
+    },
+    "blk.31.post_attention_norm.weight": {
+      "index": 546,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15816336
+    },
+    "blk.31.post_ffw_norm.weight": {
+      "index": 547,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15816401
+    },
+    "blk.31.post_norm.weight": {
+      "index": 548,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15816460
+    },
+    "blk.31.proj.weight": {
+      "index": 549,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15816515
+    },
+    "blk.32.attn_k.weight": {
+      "index": 550,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15816573
+    },
+    "blk.32.attn_k_norm.weight": {
+      "index": 551,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15816633
+    },
+    "blk.32.attn_norm.weight": {
+      "index": 552,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15816690
+    },
+    "blk.32.attn_output.weight": {
+      "index": 553,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15816745
+    },
+    "blk.32.attn_q.weight": {
+      "index": 554,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15816810
+    },
+    "blk.32.attn_q_norm.weight": {
+      "index": 555,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15816870
+    },
+    "blk.32.attn_v.weight": {
+      "index": 556,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15816927
+    },
+    "blk.32.ffn_down.weight": {
+      "index": 557,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15816987
+    },
+    "blk.32.ffn_gate.weight": {
+      "index": 558,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15817049
+    },
+    "blk.32.ffn_norm.weight": {
+      "index": 559,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15817111
+    },
+    "blk.32.ffn_up.weight": {
+      "index": 560,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15817165
+    },
+    "blk.32.inp_gate.weight": {
+      "index": 561,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15817225
+    },
+    "blk.32.layer_output_scale.weight": {
+      "index": 562,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15817287
+    },
+    "blk.32.post_attention_norm.weight": {
+      "index": 563,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15817351
+    },
+    "blk.32.post_ffw_norm.weight": {
+      "index": 564,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15817416
+    },
+    "blk.32.post_norm.weight": {
+      "index": 565,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15817475
+    },
+    "blk.32.proj.weight": {
+      "index": 566,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15817530
+    },
+    "blk.33.attn_k.weight": {
+      "index": 567,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15817588
+    },
+    "blk.33.attn_k_norm.weight": {
+      "index": 568,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15817648
+    },
+    "blk.33.attn_norm.weight": {
+      "index": 569,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15817705
+    },
+    "blk.33.attn_output.weight": {
+      "index": 570,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15817760
+    },
+    "blk.33.attn_q.weight": {
+      "index": 571,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15817825
+    },
+    "blk.33.attn_q_norm.weight": {
+      "index": 572,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15817885
+    },
+    "blk.33.attn_v.weight": {
+      "index": 573,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15817942
+    },
+    "blk.33.ffn_down.weight": {
+      "index": 574,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15818002
+    },
+    "blk.33.ffn_gate.weight": {
+      "index": 575,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15818064
+    },
+    "blk.33.ffn_norm.weight": {
+      "index": 576,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15818126
+    },
+    "blk.33.ffn_up.weight": {
+      "index": 577,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15818180
+    },
+    "blk.33.inp_gate.weight": {
+      "index": 578,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15818240
+    },
+    "blk.33.layer_output_scale.weight": {
+      "index": 579,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15818302
+    },
+    "blk.33.post_attention_norm.weight": {
+      "index": 580,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15818366
+    },
+    "blk.33.post_ffw_norm.weight": {
+      "index": 581,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15818431
+    },
+    "blk.33.post_norm.weight": {
+      "index": 582,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15818490
+    },
+    "blk.33.proj.weight": {
+      "index": 583,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15818545
+    },
+    "blk.34.attn_k.weight": {
+      "index": 584,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15818603
+    },
+    "blk.34.attn_k_norm.weight": {
+      "index": 585,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15818663
+    },
+    "blk.34.attn_norm.weight": {
+      "index": 586,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15818720
+    },
+    "blk.34.attn_output.weight": {
+      "index": 587,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15818775
+    },
+    "blk.34.attn_q.weight": {
+      "index": 588,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15818840
+    },
+    "blk.34.attn_q_norm.weight": {
+      "index": 589,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15818900
+    },
+    "blk.34.attn_v.weight": {
+      "index": 590,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15818957
+    },
+    "blk.34.ffn_down.weight": {
+      "index": 591,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15819017
+    },
+    "blk.34.ffn_gate.weight": {
+      "index": 592,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15819079
+    },
+    "blk.34.ffn_norm.weight": {
+      "index": 593,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15819141
+    },
+    "blk.34.ffn_up.weight": {
+      "index": 594,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15819195
+    },
+    "blk.34.inp_gate.weight": {
+      "index": 595,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15819255
+    },
+    "blk.34.layer_output_scale.weight": {
+      "index": 596,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15819317
+    },
+    "blk.34.post_attention_norm.weight": {
+      "index": 597,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15819381
+    },
+    "blk.34.post_ffw_norm.weight": {
+      "index": 598,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15819446
+    },
+    "blk.34.post_norm.weight": {
+      "index": 599,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15819505
+    },
+    "blk.34.proj.weight": {
+      "index": 600,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15819560
+    },
+    "blk.35.attn_k.weight": {
+      "index": 601,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15819618
+    },
+    "blk.35.attn_k_norm.weight": {
+      "index": 602,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15819678
+    },
+    "blk.35.attn_norm.weight": {
+      "index": 603,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15819735
+    },
+    "blk.35.attn_output.weight": {
+      "index": 604,
+      "shape": [
+        4096,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15819790
+    },
+    "blk.35.attn_q.weight": {
+      "index": 605,
+      "shape": [
+        2560,
+        4096
+      ],
+      "type": "Q8_0",
+      "offset": 15819855
+    },
+    "blk.35.attn_q_norm.weight": {
+      "index": 606,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15819915
+    },
+    "blk.35.attn_v.weight": {
+      "index": 607,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15819972
+    },
+    "blk.35.ffn_down.weight": {
+      "index": 608,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15820032
+    },
+    "blk.35.ffn_gate.weight": {
+      "index": 609,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15820094
+    },
+    "blk.35.ffn_norm.weight": {
+      "index": 610,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15820156
+    },
+    "blk.35.ffn_up.weight": {
+      "index": 611,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15820210
+    },
+    "blk.35.inp_gate.weight": {
+      "index": 612,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15820270
+    },
+    "blk.35.layer_output_scale.weight": {
+      "index": 613,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15820332
+    },
+    "blk.35.post_attention_norm.weight": {
+      "index": 614,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15820396
+    },
+    "blk.35.post_ffw_norm.weight": {
+      "index": 615,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15820461
+    },
+    "blk.35.post_norm.weight": {
+      "index": 616,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15820520
+    },
+    "blk.35.proj.weight": {
+      "index": 617,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15820575
+    },
+    "blk.36.attn_k.weight": {
+      "index": 618,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15820633
+    },
+    "blk.36.attn_k_norm.weight": {
+      "index": 619,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15820693
+    },
+    "blk.36.attn_norm.weight": {
+      "index": 620,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15820750
+    },
+    "blk.36.attn_output.weight": {
+      "index": 621,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15820805
+    },
+    "blk.36.attn_q.weight": {
+      "index": 622,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15820870
+    },
+    "blk.36.attn_q_norm.weight": {
+      "index": 623,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15820930
+    },
+    "blk.36.attn_v.weight": {
+      "index": 624,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15820987
+    },
+    "blk.36.ffn_down.weight": {
+      "index": 625,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15821047
+    },
+    "blk.36.ffn_gate.weight": {
+      "index": 626,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15821109
+    },
+    "blk.36.ffn_norm.weight": {
+      "index": 627,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15821171
+    },
+    "blk.36.ffn_up.weight": {
+      "index": 628,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15821225
+    },
+    "blk.36.inp_gate.weight": {
+      "index": 629,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15821285
+    },
+    "blk.36.layer_output_scale.weight": {
+      "index": 630,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15821347
+    },
+    "blk.36.post_attention_norm.weight": {
+      "index": 631,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15821411
+    },
+    "blk.36.post_ffw_norm.weight": {
+      "index": 632,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15821476
+    },
+    "blk.36.post_norm.weight": {
+      "index": 633,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15821535
+    },
+    "blk.36.proj.weight": {
+      "index": 634,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15821590
+    },
+    "blk.37.attn_k.weight": {
+      "index": 635,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15821648
+    },
+    "blk.37.attn_k_norm.weight": {
+      "index": 636,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15821708
+    },
+    "blk.37.attn_norm.weight": {
+      "index": 637,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15821765
+    },
+    "blk.37.attn_output.weight": {
+      "index": 638,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15821820
+    },
+    "blk.37.attn_q.weight": {
+      "index": 639,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15821885
+    },
+    "blk.37.attn_q_norm.weight": {
+      "index": 640,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15821945
+    },
+    "blk.37.attn_v.weight": {
+      "index": 641,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15822002
+    },
+    "blk.37.ffn_down.weight": {
+      "index": 642,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15822062
+    },
+    "blk.37.ffn_gate.weight": {
+      "index": 643,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15822124
+    },
+    "blk.37.ffn_norm.weight": {
+      "index": 644,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15822186
+    },
+    "blk.37.ffn_up.weight": {
+      "index": 645,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15822240
+    },
+    "blk.37.inp_gate.weight": {
+      "index": 646,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15822300
+    },
+    "blk.37.layer_output_scale.weight": {
+      "index": 647,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15822362
+    },
+    "blk.37.post_attention_norm.weight": {
+      "index": 648,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15822426
+    },
+    "blk.37.post_ffw_norm.weight": {
+      "index": 649,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15822491
+    },
+    "blk.37.post_norm.weight": {
+      "index": 650,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15822550
+    },
+    "blk.37.proj.weight": {
+      "index": 651,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15822605
+    },
+    "blk.38.attn_k.weight": {
+      "index": 652,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15822663
+    },
+    "blk.38.attn_k_norm.weight": {
+      "index": 653,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15822723
+    },
+    "blk.38.attn_norm.weight": {
+      "index": 654,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15822780
+    },
+    "blk.38.attn_output.weight": {
+      "index": 655,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15822835
+    },
+    "blk.38.attn_q.weight": {
+      "index": 656,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15822900
+    },
+    "blk.38.attn_q_norm.weight": {
+      "index": 657,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15822960
+    },
+    "blk.38.attn_v.weight": {
+      "index": 658,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15823017
+    },
+    "blk.38.ffn_down.weight": {
+      "index": 659,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15823077
+    },
+    "blk.38.ffn_gate.weight": {
+      "index": 660,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15823139
+    },
+    "blk.38.ffn_norm.weight": {
+      "index": 661,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15823201
+    },
+    "blk.38.ffn_up.weight": {
+      "index": 662,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15823255
+    },
+    "blk.38.inp_gate.weight": {
+      "index": 663,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15823315
+    },
+    "blk.38.layer_output_scale.weight": {
+      "index": 664,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15823377
+    },
+    "blk.38.post_attention_norm.weight": {
+      "index": 665,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15823441
+    },
+    "blk.38.post_ffw_norm.weight": {
+      "index": 666,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15823506
+    },
+    "blk.38.post_norm.weight": {
+      "index": 667,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15823565
+    },
+    "blk.38.proj.weight": {
+      "index": 668,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15823620
+    },
+    "blk.39.attn_k.weight": {
+      "index": 669,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15823678
+    },
+    "blk.39.attn_k_norm.weight": {
+      "index": 670,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15823738
+    },
+    "blk.39.attn_norm.weight": {
+      "index": 671,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15823795
+    },
+    "blk.39.attn_output.weight": {
+      "index": 672,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15823850
+    },
+    "blk.39.attn_q.weight": {
+      "index": 673,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15823915
+    },
+    "blk.39.attn_q_norm.weight": {
+      "index": 674,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15823975
+    },
+    "blk.39.attn_v.weight": {
+      "index": 675,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15824032
+    },
+    "blk.39.ffn_down.weight": {
+      "index": 676,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15824092
+    },
+    "blk.39.ffn_gate.weight": {
+      "index": 677,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15824154
+    },
+    "blk.39.ffn_norm.weight": {
+      "index": 678,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15824216
+    },
+    "blk.39.ffn_up.weight": {
+      "index": 679,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15824270
+    },
+    "blk.39.inp_gate.weight": {
+      "index": 680,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15824330
+    },
+    "blk.39.layer_output_scale.weight": {
+      "index": 681,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15824392
+    },
+    "blk.39.post_attention_norm.weight": {
+      "index": 682,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15824456
+    },
+    "blk.39.post_ffw_norm.weight": {
+      "index": 683,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15824521
+    },
+    "blk.39.post_norm.weight": {
+      "index": 684,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15824580
+    },
+    "blk.39.proj.weight": {
+      "index": 685,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15824635
+    },
+    "blk.40.attn_k.weight": {
+      "index": 686,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15824693
+    },
+    "blk.40.attn_k_norm.weight": {
+      "index": 687,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15824753
+    },
+    "blk.40.attn_norm.weight": {
+      "index": 688,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15824810
+    },
+    "blk.40.attn_output.weight": {
+      "index": 689,
+      "shape": [
+        2048,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15824865
+    },
+    "blk.40.attn_q.weight": {
+      "index": 690,
+      "shape": [
+        2560,
+        2048
+      ],
+      "type": "Q8_0",
+      "offset": 15824930
+    },
+    "blk.40.attn_q_norm.weight": {
+      "index": 691,
+      "shape": [
+        256
+      ],
+      "type": "F32",
+      "offset": 15824990
+    },
+    "blk.40.attn_v.weight": {
+      "index": 692,
+      "shape": [
+        2560,
+        512
+      ],
+      "type": "Q8_0",
+      "offset": 15825047
+    },
+    "blk.40.ffn_down.weight": {
+      "index": 693,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15825107
+    },
+    "blk.40.ffn_gate.weight": {
+      "index": 694,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15825169
+    },
+    "blk.40.ffn_norm.weight": {
+      "index": 695,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15825231
+    },
+    "blk.40.ffn_up.weight": {
+      "index": 696,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15825285
+    },
+    "blk.40.inp_gate.weight": {
+      "index": 697,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15825345
+    },
+    "blk.40.layer_output_scale.weight": {
+      "index": 698,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15825407
+    },
+    "blk.40.post_attention_norm.weight": {
+      "index": 699,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15825471
+    },
+    "blk.40.post_ffw_norm.weight": {
+      "index": 700,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15825536
+    },
+    "blk.40.post_norm.weight": {
+      "index": 701,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15825595
+    },
+    "blk.40.proj.weight": {
+      "index": 702,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15825650
+    },
+    "blk.41.attn_k.weight": {
+      "index": 703,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15825708
+    },
+    "blk.41.attn_k_norm.weight": {
+      "index": 704,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15825768
+    },
+    "blk.41.attn_norm.weight": {
+      "index": 705,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15825825
+    },
+    "blk.41.attn_output.weight": {
+      "index": 706,
+      "shape": [
+        4096,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15825880
+    },
+    "blk.41.attn_q.weight": {
+      "index": 707,
+      "shape": [
+        2560,
+        4096
+      ],
+      "type": "Q8_0",
+      "offset": 15825945
+    },
+    "blk.41.attn_q_norm.weight": {
+      "index": 708,
+      "shape": [
+        512
+      ],
+      "type": "F32",
+      "offset": 15826005
+    },
+    "blk.41.attn_v.weight": {
+      "index": 709,
+      "shape": [
+        2560,
+        1024
+      ],
+      "type": "Q8_0",
+      "offset": 15826062
+    },
+    "blk.41.ffn_down.weight": {
+      "index": 710,
+      "shape": [
+        10240,
+        2560
+      ],
+      "type": "Q8_0",
+      "offset": 15826122
+    },
+    "blk.41.ffn_gate.weight": {
+      "index": 711,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15826184
+    },
+    "blk.41.ffn_norm.weight": {
+      "index": 712,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15826246
+    },
+    "blk.41.ffn_up.weight": {
+      "index": 713,
+      "shape": [
+        2560,
+        10240
+      ],
+      "type": "Q8_0",
+      "offset": 15826300
+    },
+    "blk.41.inp_gate.weight": {
+      "index": 714,
+      "shape": [
+        2560,
+        256
+      ],
+      "type": "F32",
+      "offset": 15826360
+    },
+    "blk.41.layer_output_scale.weight": {
+      "index": 715,
+      "shape": [
+        1
+      ],
+      "type": "F32",
+      "offset": 15826422
+    },
+    "blk.41.post_attention_norm.weight": {
+      "index": 716,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15826486
+    },
+    "blk.41.post_ffw_norm.weight": {
+      "index": 717,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15826551
+    },
+    "blk.41.post_norm.weight": {
+      "index": 718,
+      "shape": [
+        2560
+      ],
+      "type": "F32",
+      "offset": 15826610
+    },
+    "blk.41.proj.weight": {
+      "index": 719,
+      "shape": [
+        256,
+        2560
+      ],
+      "type": "F32",
+      "offset": 15826665
+    }
+  }
+}
