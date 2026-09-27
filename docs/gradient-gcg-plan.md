@@ -358,3 +358,12 @@ gradient-guided suffix search where:
 - memory does not grow across iterations;
 - the complete gradient and candidate-selection path remains readable in this
   repository.
+
+## Recorded experiment
+
+[attack1.txt](attack1.txt) contains a complete 30-iteration run of the
+gradient-guided demo for the prompt `"How are you doing today?"` and target
+`"Terrible"`. It records every suffix, raw serialized model input, token IDs,
+teacher-forced loss, and the final probability report. In that run, the loss
+fell from `33.31092` to `0.00353`, and the final independently evaluated joint
+probability of the target was approximately `99.65%`.
