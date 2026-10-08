@@ -115,6 +115,11 @@ pub struct Model {
 
 impl Model {
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
+        Self::load_on_device(path, candle_core::Device::Cpu)
+    }
+
+    /// Select the numerical backend explicitly; model logic and Q8 weights are shared.
+    pub fn load_on_device(path: impl AsRef<Path>, device: candle_core::Device) -> Result<Self> {
         let started = Instant::now();
         let path = path.as_ref();
         let mut file =
@@ -123,7 +128,7 @@ impl Model {
         validate_gguf(&content)?;
         let config = Gemma4Config::E4B;
         let tokenizer = Gemma4Tokenizer::from_gguf(&content)?;
-        let network = Gemma4Network::load(&content, &mut file, &config)?;
+        let network = Gemma4Network::load(&content, &mut file, &config, device)?;
         Ok(Self {
             path: path.to_path_buf(),
             config: config.clone(),

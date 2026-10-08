@@ -5,7 +5,13 @@ fn main() -> Result<()> {
     const MODEL_PATH: &str = "model/gemma-4-E4B-it-Q8_0.gguf";
     const PROMPT: &str = "How are you doing?";
 
-    let mut model = Model::load(MODEL_PATH)?;
+    let device = if std::env::args().any(|arg| arg == "--metal") {
+        candle_core::Device::new_metal(0)?
+    } else {
+        candle_core::Device::Cpu
+    };
+    println!("Backend: {device:?}");
+    let mut model = Model::load_on_device(MODEL_PATH, device)?;
     let config = model.config();
     println!("Model: {}", model.path().display());
     println!("Architecture: {}", config.architecture);

@@ -141,6 +141,13 @@ impl RmsNorm {
     }
 
     fn forward(&self, x: &Tensor) -> Result<Tensor> {
+        if x.device().is_metal() {
+            return Ok(candle_nn::ops::rms_norm(
+                &x.contiguous()?,
+                &self.weight,
+                self.epsilon as f32,
+            )?);
+        }
         let normalized = rms_no_scale(x, self.epsilon)?;
         Ok(normalized.broadcast_mul(&self.weight)?)
     }
@@ -155,6 +162,7 @@ struct Gemma4Block {
     k_proj: Option<Linear>,
     k_norm: Option<RmsNorm>,
     v_proj: Option<Linear>,
+    v_norm: RmsNorm,
     out_proj: Linear,
     post_attn_norm: RmsNorm,
     ffn_norm: RmsNorm,
@@ -203,18 +211,25 @@ impl Gemma4Block {
             .tensor(file, &format!("{prefix}.layer_output_scale.weight"), device)?
             .dequantize(device)?;
         let kind = AttentionKind::for_layer(layer);
+        let head_dim = match kind {
+            AttentionKind::Sliding => config.sliding_head_dim,
+            AttentionKind::Global => config.global_head_dim,
+        };
         Ok(Self {
             kind,
-            head_dim: match kind {
-                AttentionKind::Sliding => config.sliding_head_dim,
-                AttentionKind::Global => config.global_head_dim,
-            },
+            head_dim,
             attn_norm: norm("attn_norm.weight", file)?,
             q_proj: linear("attn_q.weight", file)?,
             q_norm: norm("attn_q_norm.weight", file)?,
             k_proj,
             k_norm,
             v_proj,
+            // V normalization has no learned scale. Ones let the numerical
+            // backend execute the same operation with its fused RMS kernel.
+            v_norm: RmsNorm {
+                weight: Tensor::ones(head_dim, candle_core::DType::F32, device)?,
+                epsilon: config.rms_norm_epsilon,
+            },
             out_proj: linear("attn_output.weight", file)?,
             post_attn_norm: norm("post_attention_norm.weight", file)?,
             ffn_norm: norm("ffn_norm.weight", file)?,
@@ -238,7 +253,7 @@ impl Gemma4Block {
         shared_kv: Option<&LayerKv>,
         start_position: usize,
         config: &Gemma4Config,
-        rope: &Rope,
+        rope: &PreparedRope,
         differentiable: bool,
     ) -> Result<Tensor> {
         let sequence = x.dim(0)?;
@@ -252,7 +267,7 @@ impl Gemma4Block {
         let q = self.q_norm.forward(&q)?;
         // Future hook: inspect or modify normalized Q before RoPE.
         let q = rope
-            .apply(&q, start_position, self.kind, differentiable)?
+            .apply(&q, self.kind, differentiable)?
             .transpose(0, 1)?
             .unsqueeze(0)?;
 
@@ -265,15 +280,13 @@ impl Gemma4Block {
                 self.head_dim,
             ))?;
             let k = k_norm.forward(&k)?;
-            let k = rope
-                .apply(&k, start_position, self.kind, differentiable)?
-                .transpose(0, 1)?;
+            let k = rope.apply(&k, self.kind, differentiable)?.transpose(0, 1)?;
             let v = v_proj.forward_mode(&normalized, differentiable)?.reshape((
                 sequence,
                 config.kv_heads,
                 self.head_dim,
             ))?;
-            let v = rms_no_scale(&v, config.rms_norm_epsilon)?.transpose(0, 1)?;
+            let v = self.v_norm.forward(&v)?.transpose(0, 1)?;
             // Future hook: inspect or modify K/V before they enter the cache.
             let combined = match layer_cache.as_ref() {
                 Some(previous) => LayerKv {
@@ -292,28 +305,49 @@ impl Gemma4Block {
 
         let key = current_kv.key.unsqueeze(0)?;
         let value = current_kv.value.unsqueeze(0)?;
-        let repetitions = config.attention_heads / config.kv_heads;
-        let key = repeat_kv(&key, repetitions)?;
-        let value = repeat_kv(&value, repetitions)?;
-        let total_keys = key.dim(2)?;
-
-        let scores = q.matmul(&key.transpose(2, 3)?)?;
-        let mask = attention_mask(
-            sequence,
-            total_keys,
-            start_position,
-            self.kind,
-            config.sliding_window,
-            x.device(),
-        )?;
-        let scores = scores.broadcast_add(&mask)?;
-        let probabilities = if differentiable {
-            candle_nn::ops::softmax(&scores, D::Minus1)?
+        // Candle's fused Metal attention consumes grouped KV heads directly.
+        // Gemma 4 uses unit attention scale after Q/K normalization.
+        // Keep global attention explicit: Candle 0.11's F32 SDPA vector kernel
+        // also fails numerical parity at head_dim=512 on this M2.
+        let attention = if x.device().is_metal()
+            && !differentiable
+            && sequence == 1
+            && self.head_dim == 256
+            && std::env::var_os("GEMMA4_EXPLICIT_ATTENTION").is_none()
+        {
+            let total_keys = key.dim(2)?;
+            let keep = if self.kind == AttentionKind::Sliding {
+                total_keys.min(config.sliding_window)
+            } else {
+                total_keys
+            };
+            let key = key.narrow(2, total_keys - keep, keep)?.contiguous()?;
+            let value = value.narrow(2, total_keys - keep, keep)?.contiguous()?;
+            candle_nn::ops::sdpa(&q.contiguous()?, &key, &value, None, false, 1.0, 1.0)?
         } else {
-            candle_nn::ops::softmax_last_dim(&scores)?
+            let repetitions = config.attention_heads / config.kv_heads;
+            let key = repeat_kv(&key, repetitions)?;
+            let value = repeat_kv(&value, repetitions)?;
+            let total_keys = key.dim(2)?;
+
+            let scores = q.matmul(&key.transpose(2, 3)?)?;
+            let mask = attention_mask(
+                sequence,
+                total_keys,
+                start_position,
+                self.kind,
+                config.sliding_window,
+                x.device(),
+            )?;
+            let scores = scores.broadcast_add(&mask)?;
+            let probabilities = if differentiable {
+                candle_nn::ops::softmax(&scores, D::Minus1)?
+            } else {
+                candle_nn::ops::softmax_last_dim(&scores)?
+            };
+            // Future hook: inspect attention scores/probabilities here.
+            probabilities.matmul(&value)?
         };
-        // Future hook: inspect attention scores/probabilities here.
-        let attention = probabilities.matmul(&value)?;
         let attention = attention
             .transpose(1, 2)?
             .contiguous()?
@@ -387,24 +421,35 @@ impl Rope {
         })
     }
 
-    fn apply(
-        &self,
-        x: &Tensor,
-        start: usize,
-        kind: AttentionKind,
-        differentiable: bool,
-    ) -> Result<Tensor> {
-        let sequence = x.dim(0)?;
-        let inverse = match kind {
-            AttentionKind::Sliding => &self.sliding_inv_freq,
-            AttentionKind::Global => &self.global_inv_freq,
-        };
+    // All Q/K projections in a forward call share the same position tables.
+    // Build two tables once, rather than uploading positions and launching
+    // matmul/cos/sin separately for every Q and K in all 42 layers.
+    fn prepare(&self, start: usize, sequence: usize) -> Result<PreparedRope> {
         let positions: Vec<f32> = (start..start + sequence).map(|x| x as f32).collect();
         let positions = Tensor::from_vec(positions, (sequence, 1), &self.device)?;
-        let inverse = Tensor::from_slice(inverse, (1, inverse.len()), &self.device)?;
-        let angles = positions.matmul(&inverse)?;
-        let cos = angles.cos()?;
-        let sin = angles.sin()?;
+        let table = |inverse: &[f32]| -> Result<(Tensor, Tensor)> {
+            let inverse = Tensor::from_slice(inverse, (1, inverse.len()), &self.device)?;
+            let angles = positions.matmul(&inverse)?;
+            Ok((angles.cos()?, angles.sin()?))
+        };
+        Ok(PreparedRope {
+            sliding: table(&self.sliding_inv_freq)?,
+            global: table(&self.global_inv_freq)?,
+        })
+    }
+}
+
+struct PreparedRope {
+    sliding: (Tensor, Tensor),
+    global: (Tensor, Tensor),
+}
+
+impl PreparedRope {
+    fn apply(&self, x: &Tensor, kind: AttentionKind, differentiable: bool) -> Result<Tensor> {
+        let (cos, sin) = match kind {
+            AttentionKind::Sliding => &self.sliding,
+            AttentionKind::Global => &self.global,
+        };
         let x = x.transpose(0, 1)?.unsqueeze(0)?.contiguous()?;
         let rotated = if differentiable {
             candle_nn::rotary_emb::rope_slow(&x, &cos, &sin)?
@@ -434,8 +479,12 @@ pub(crate) struct SuffixGradient {
 }
 
 impl Gemma4Network {
-    pub(crate) fn load(content: &Content, file: &mut File, config: &Gemma4Config) -> Result<Self> {
-        let device = Device::Cpu;
+    pub(crate) fn load(
+        content: &Content,
+        file: &mut File,
+        config: &Gemma4Config,
+        device: Device,
+    ) -> Result<Self> {
         let token_tensor = Arc::new(content.tensor(file, "token_embd.weight", &device)?);
         let token_weight = QMatMul::from_arc(token_tensor.clone())?;
         let token_embedding = Linear {
@@ -534,6 +583,7 @@ impl Gemma4Network {
 
         let mut shared_sliding: Option<LayerKv> = None;
         let mut shared_global: Option<LayerKv> = None;
+        let rope = self.rope.prepare(start, tokens)?;
         for (layer_index, block) in self.blocks.iter().enumerate() {
             // Future hook: residual stream before block.
             let ple = per_layer_inputs.narrow(1, layer_index, 1)?.squeeze(1)?;
@@ -548,7 +598,7 @@ impl Gemma4Network {
                 shared,
                 start,
                 &self.config,
-                &self.rope,
+                &rope,
                 differentiable,
             )?;
             if layer_index == self.config.layer_count - self.config.shared_kv_layers - 2 {
@@ -582,6 +632,9 @@ impl Gemma4Network {
         target_start: usize,
         target_tokens: &[u32],
     ) -> Result<SuffixGradient> {
+        if !self.device.is_cpu() {
+            bail!("suffix gradients currently require Model::load (CPU); Metal is inference-only");
+        }
         if suffix_length == 0 || target_tokens.is_empty() {
             bail!("suffix gradient requires non-empty suffix and target");
         }
@@ -726,6 +779,32 @@ fn attention_mask(
 mod tests {
     use super::*;
     use candle_core::quantized::GgmlDType;
+
+    #[test]
+    #[cfg(feature = "metal")]
+    #[ignore = "requires an Apple GPU"]
+    fn metal_grouped_attention_matches_explicit() -> Result<()> {
+        let device = Device::new_metal(0)?;
+        // Only the 256-dimensional kernel is enabled in the model. The 512
+        // kernel failed this check (max error 0.421), so global attention uses
+        // explicit matmul/softmax. Full-model parity covers that fallback.
+        for dim in [256] {
+            let q = Tensor::arange(0f32, (8 * dim) as f32, &device)?
+                .sin()?
+                .reshape((1, 8, 1, dim))?;
+            let k = Tensor::arange(0f32, (2 * 33 * dim) as f32, &device)?
+                .cos()?
+                .reshape((1, 2, 33, dim))?;
+            let v = (&k * 0.3)?.sin()?;
+            let fused = candle_nn::ops::sdpa(&q, &k, &v, None, false, 1.0, 1.0)?;
+            let scores = q.matmul(&repeat_kv(&k, 4)?.transpose(2, 3)?)?;
+            let explicit = candle_nn::ops::softmax_last_dim(&scores)?.matmul(&repeat_kv(&v, 4)?)?;
+            let error = (&fused - &explicit)?.abs()?.max_all()?.to_scalar::<f32>()?;
+            println!("head_dim={dim}, max_error={error}");
+            assert!(error < 1e-4, "SDPA head_dim={dim} error={error}");
+        }
+        Ok(())
+    }
 
     #[test]
     fn masks_are_causal_and_sliding() -> Result<()> {

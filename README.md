@@ -97,6 +97,23 @@ cargo run --release --example normal_inference
 It prints the serialized prompt, generated text, prompt and output token IDs,
 prefill/decode timings, throughput, and top first-token logits.
 
+On Apple Silicon, enable the quantized Metal backend:
+
+```bash
+cargo run --release --features metal --example normal_inference -- --metal
+```
+
+In library code use `Model::load_on_device(path, candle_core::Device::new_metal(0)?)`.
+`Model::load` remains CPU-based for the gradient experiments. Metal currently
+supports inference and gradient-free scoring; activation backward requires CPU.
+Weights remain Q8_0, including embedding lookups and the tied output projection.
+Our model and generation logic are unchanged; Candle supplies Metal Q8 matmul,
+fused RMSNorm, and grouped-query attention during decode. The explicit attention
+path remains in the source for inspecting scores and probabilities.
+
+See [the performance measurements](docs/performance.md) for commands, warmup
+behavior, and the llama.cpp comparison.
+
 ### Normal inference with a fixed suffix
 
 [examples/normal_inference_with_suffix.rs](examples/normal_inference_with_suffix.rs)
