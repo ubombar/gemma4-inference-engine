@@ -20,6 +20,14 @@ pub fn serialize_user_prompt(prompt: &str) -> String {
     format!("<|turn>user\n{}<turn|>\n<|turn>model\n", prompt.trim())
 }
 
+/// Exact text-only Gemma 4 IT prompt with the template's `enable_thinking` flag.
+pub fn serialize_user_prompt_with_thinking(prompt: &str) -> String {
+    format!(
+        "<|turn>system\n<|think|>\n<turn|>\n<|turn>user\n{}<turn|>\n<|turn>model\n",
+        prompt.trim()
+    )
+}
+
 pub(crate) fn adversarial_prompt_parts(prompt: &str) -> (String, &'static str) {
     (
         format!("<|turn>user\n{}", prompt.trim()),

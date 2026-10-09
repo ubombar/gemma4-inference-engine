@@ -31,8 +31,28 @@ architecture inspection.
 
 ## Examples
 
-This repository is a library with three explicit Cargo examples. There is no
-default binary, so select an example with `--example`.
+This repository provides a small terminal-chat binary and explicit Cargo
+examples for focused experiments. Select an experiment with `--example`.
+
+### Terminal chat
+
+For a minimal one-turn terminal chat, run:
+
+```bash
+cargo run --release --features metal -- --metal
+```
+
+Enter one user message per line. Type `/exit` or press Ctrl-D to quit. This
+small interface deliberately sends each line as a new Gemma user turn; it does
+not retain multi-turn conversation history.
+
+Tokens are printed as they are sampled. The trailing timing line reports
+KV-cached decode throughput. To let the Gemma template request a thought
+channel and render it in a separate `[thinking]` block, add `--thinking`:
+
+```bash
+cargo run --release --features metal -- --metal --thinking
+```
 
 ### Gradient-guided GCG search
 

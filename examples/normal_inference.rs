@@ -24,6 +24,7 @@ fn main() -> Result<()> {
         max_tokens: 32,
         temperature: 0.0,
         seed: 42,
+        enable_thinking: false,
     })?;
 
     println!("Prompt:\n{PROMPT}\n");

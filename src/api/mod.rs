@@ -26,7 +26,7 @@ pub use optimizer::{
     SuffixOptimizationResult, SuffixOptimizationStep, TargetTokenProbability, TokenProbability,
 };
 pub use sampling::SamplingConfig;
-pub use tokenizer::{ChatMessage, serialize_user_prompt};
+pub use tokenizer::{ChatMessage, serialize_user_prompt, serialize_user_prompt_with_thinking};
 
 #[derive(Debug, Clone)]
 pub struct Gemma4Config {
@@ -77,6 +77,8 @@ pub struct GenerationRequest {
     pub max_tokens: usize,
     pub temperature: f32,
     pub seed: u64,
+    /// Insert Gemma 4's template-supported thinking marker before the user turn.
+    pub enable_thinking: bool,
 }
 
 #[derive(Debug, Clone)]
@@ -186,7 +188,24 @@ impl Model {
     }
 
     pub fn generate(&mut self, request: GenerationRequest) -> Result<GenerationResult> {
-        let serialized_prompt = self.serialized_prompt(&request.prompt);
+        self.generate_streaming(request, |_| Ok(()))
+    }
+
+    /// Generate one token at a time and invoke `on_token` immediately after
+    /// sampling. The callback runs before the next KV-cached decode step.
+    pub fn generate_streaming<F>(
+        &mut self,
+        request: GenerationRequest,
+        mut on_token: F,
+    ) -> Result<GenerationResult>
+    where
+        F: FnMut(&TokenStep) -> Result<()>,
+    {
+        let serialized_prompt = if request.enable_thinking {
+            serialize_user_prompt_with_thinking(&request.prompt)
+        } else {
+            self.serialized_prompt(&request.prompt)
+        };
         let prompt_tokens = self.tokenize_serialized(&serialized_prompt)?;
         let mut sampler = Sampler::new(SamplingConfig {
             temperature: request.temperature,
@@ -203,11 +222,13 @@ impl Model {
         for step_index in 0..request.max_tokens {
             let token_id = sampler.sample(&logits)?;
             let piece = self.tokenizer.token_piece(token_id)?;
-            steps.push(TokenStep {
+            let step = TokenStep {
                 token_id,
                 text: piece,
                 top_logits: self.top_logits(&logits, 5)?,
-            });
+            };
+            on_token(&step)?;
+            steps.push(step);
             generated_tokens.push(token_id);
             if token_id == self.tokenizer.eos_id() {
                 break;

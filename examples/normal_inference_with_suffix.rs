@@ -23,6 +23,7 @@ fn main() -> Result<()> {
         max_tokens: 2,
         temperature: 0.0,
         seed: 42,
+        enable_thinking: false,
     })?;
 
     println!("Combined prompt:\n{prompt}\n");
